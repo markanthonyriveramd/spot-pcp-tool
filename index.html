@@ -215,7 +215,58 @@ footer.app p{margin:0 0 8px;}
 .spot-cta .btn:hover{background:var(--accent-soft);}
 .hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 26px;}
 .spot-ic{width:42px;height:42px;border-radius:11px;background:var(--accent-soft);display:grid;place-items:center;}
-.spot-cols{grid-template-columns:1fr 1.05fr;}
+@media(min-width:861px){ .spot-cols{grid-template-columns:1fr 1.05fr;} }
+/* phone: one column, entry and results as two tabs */
+.spot-switch{display:none;}
+.spot-fab{display:none;}
+@media(max-width:860px){
+  .spot-switch{display:flex;position:sticky;top:60px;z-index:15;background:#fff;padding:8px 0 10px;margin:-6px 0 8px;border-bottom:1px solid var(--line);gap:6px;}
+  .spot-switch button{flex:1;border:1.5px solid var(--line);background:#fff;color:var(--muted);font-weight:750;font-size:15px;padding:11px 8px;border-radius:12px;cursor:pointer;}
+  .spot-switch button.on{border-color:var(--accent);background:var(--accent);color:#fff;}
+  .spot-switch .cnt{display:inline-block;min-width:20px;padding:0 6px;margin-left:6px;border-radius:999px;background:var(--red);color:#fff;font-size:12px;line-height:20px;}
+  .spot-switch button.on .cnt{background:#fff;color:var(--red);}
+  .spot-cols[data-sv="enter"] #spotSnap{display:none;}
+  .spot-cols[data-sv="results"] .spot-entry{display:none;}
+  .spot-fab{display:flex;position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:18;justify-content:center;align-items:center;gap:8px;border:0;border-radius:14px;background:var(--accent);color:#fff;font-weight:800;font-size:16px;padding:15px 16px;box-shadow:0 8px 24px rgba(22,59,104,.3);cursor:pointer;}
+  .spot-fab .cnt{background:#fff;color:var(--red);border-radius:999px;padding:1px 8px;font-size:13px;}
+  .spot-cols[data-sv="results"] ~ .spot-fab{display:none;}
+  .spot-pad{height:76px;}
+}
+@media(min-width:861px){ .spot-pad{display:none;} .spot-back{display:none;} }
+/* larger, zoom-free entry on phones */
+@media(max-width:620px){
+  .field input[type=number],.field select{font-size:16px;padding:12px;}
+  .field label,.field .flabel{font-size:14px;}
+  .seg button{font-size:14.5px;padding:12px 6px;}
+  .card{padding:16px;}
+  .mod-title h1{font-size:21px;}
+}
+/* tappable unit chips + units panel */
+.ubtn{border:1px solid var(--accent-line);background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:11.5px;border-radius:999px;padding:1px 8px;margin-left:4px;cursor:pointer;font-family:var(--font);vertical-align:1px;}
+.ubtn:hover{background:#DCE8F7;}
+.units-btn{display:flex;align-items:center;gap:6px;border:1.5px solid var(--accent-line);background:#fff;color:var(--accent);font-weight:750;font-size:13px;border-radius:999px;padding:7px 12px;cursor:pointer;white-space:nowrap;}
+.units-btn small{color:var(--muted);font-weight:600;}
+.sheet{position:fixed;inset:0;z-index:40;background:rgba(15,25,45,.45);display:flex;align-items:flex-start;justify-content:center;padding:70px 12px 12px;overflow:auto;}
+.sheet .box{background:#fff;border-radius:18px;max-width:520px;width:100%;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+.sheet h2{margin:0 0 4px;font-size:20px;}
+.urow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;}
+.urow:last-child{border-bottom:0;}
+.urow .seg{min-width:190px;}
+.urow .seg button{padding:8px 6px;font-size:13px;}
+.gate select,.sheet select{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:11px;font-size:16px;font-family:var(--font);margin:4px 0 16px;background:#FBFCFD;}
+.fives{border:1.5px solid var(--accent-line);background:var(--accent-soft);border-radius:12px;padding:12px 14px;margin:8px 0;font-size:13.5px;}
+.fives b.t{display:block;color:var(--accent);font-size:12px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;}
+.fives ol{margin:0;padding-left:18px;}
+.fives li{margin:3px 0;}
+.lowlab{border:1px dashed var(--accent-line);border-radius:12px;padding:12px 14px;margin-top:14px;font-size:13.5px;}
+.lowlab b{display:block;margin-bottom:4px;}
+.lowlab ul{margin:4px 0 0;padding-left:18px;}
+.linkbtn.arm{color:var(--red);}
+.pcount{display:none;font-weight:700;color:var(--ink);}
+@media(max-width:620px){ .pbar .chips{display:none;} .pcount{display:inline;} }
+.lrow{display:flex;align-items:center;gap:2px;flex-wrap:wrap;}
+.lrow label{font-size:12.5px;font-weight:650;color:var(--ink);}
+@media(max-width:620px){ .lrow label{font-size:14px;} .ubtn{font-size:12.5px;padding:2px 9px;} }
 .snap-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px;}
 .snap-head h2{margin:0;}
 .snap-btns{display:flex;gap:6px;}
@@ -235,6 +286,9 @@ footer.app p{margin:0 0 8px;}
   header.app,footer.app,.no-print,.pbar,.gate,nav.spot{display:none !important;}
   .print-only{display:block;}
   .cols,.spot-cols{display:block;}
+  .spot-cols .spot-entry{display:none !important;}
+  .spot-cols #spotSnap{display:block !important;}
+  .spot-switch,.spot-fab,.spot-pad,.ubtn{display:none !important;}
   .sticky{position:static;}
   .mod-head{background:#fff;border:0;}
   .result,.tile{break-inside:avoid;border-color:#bbb;}
@@ -250,12 +304,7 @@ footer.app p{margin:0 0 8px;}
       <span><b>SPOT</b><small>Cardio-renal-metabolic decision support</small></span>
     </a>
     <div class="hdr-spacer"></div>
-    <div class="units"><span>Lab units</span>
-      <div class="toggle" role="group" aria-label="Lab units">
-        <button type="button" data-units="si">SI</button>
-        <button type="button" data-units="conv">Conventional</button>
-      </div>
-    </div>
+    <button type="button" class="units-btn" data-openunits aria-label="Units and region settings"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>Units <small id="unitsName">—</small></button>
   </div>
 </header>
 
@@ -264,12 +313,14 @@ footer.app p{margin:0 0 8px;}
 <footer class="app">
   <div class="wrap">
     <p><b>About SPOT.</b> SPOT is an education and decision-support tool for healthcare professionals. It supports, and does not replace, clinical judgement, current guidelines or specialist advice. The calculators are risk and screening tools, not diagnostic tests, and must not be used on their own to make treatment decisions. Drug therapy is described at class level as summarised from the cited international guidelines; check the full guideline and local prescribing information before use. Verify all inputs and results before use in patient care.</p>
-    <p><b>Privacy.</b> Values you enter stay in this browser tab only. Nothing is stored, sent or tracked, and everything clears when the page is closed or reloaded. No cookies are used.</p>
+    <p><b>Privacy.</b> Patient values you enter stay in this browser tab only. They are never stored, sent or tracked, and they clear when the page is closed or reloaded. Only your unit and region settings are remembered on this device. No cookies are used.</p>
+    <p><b>Version 1.1</b> · October 2026 · updated after review by 10 international experts in primary care, cardiology, nephrology and diabetes, and against the 2026 ESC heart failure guideline, the ADA/EASD 2026 consensus and the KDIGO 2026 diabetes and CKD guideline (public review draft).</p>
     <p id="devSlot" hidden></p>
   </div>
 </footer>
 
 <div id="gateMount"></div>
+<div id="sheetMount"></div>
 
 <script>
 // ==== PREVENT equations, transpiled mechanically from AHA's licensed R package (AHAprevent v1.0.0) ====
@@ -1130,28 +1181,77 @@ const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const PARTNER = { visible: false, text: '' };
 
 /* ---------- session state (memory only) ---------- */
-const S = { units: 'conv', hcp: false, checks: {}, panels: { ckm: 'stage', t2d: 'dx' }, hfTest: null, refine: 'none', region: 'moderate', bmiCut: 'who' };
-const P = {}; // patient values, stored in conventional (base) units
+const S = { u: {}, preset: null, score: 'prevent', hcp: false, checks: {}, panels: { ckm: 'prevent', t2d: 'dx', ob: 'adip' }, hfTest: null, refine: 'none', region: 'moderate', bmiCut: 'who', spotTab: 'enter', clearArm: false, sheet: false };
+const P = {}; // patient values, stored in base units (mg/dL, mg/g, %, cm, kg)
 
-/* ---------- units ---------- */
+/* ---------- units ----------
+   Each measure has a base unit ("conv") and an alternative ("si" — SI for labs, inches/pounds
+   for body measures). Values are always stored in the base unit; only the display changes. */
 const UNITS = {
-  creat: { conv: 'mg/dL', si: 'µmol/L', toSI: v => v * 88.4, fromSI: v => v / 88.4, dp: { conv: 2, si: 0 } },
-  chol:  { conv: 'mg/dL', si: 'mmol/L', toSI: v => v / 38.67, fromSI: v => v * 38.67, dp: { conv: 0, si: 2 } },
-  uacr:  { conv: 'mg/g',  si: 'mg/mmol', toSI: v => v / 8.84, fromSI: v => v * 8.84, dp: { conv: 0, si: 1 } },
-  hba1c: { conv: '%',     si: 'mmol/mol', toSI: v => (v - 2.15) * 10.929, fromSI: v => v / 10.929 + 2.15, dp: { conv: 1, si: 0 } },
-  glu:   { conv: 'mg/dL', si: 'mmol/L', toSI: v => v / 18, fromSI: v => v * 18, dp: { conv: 0, si: 1 } }
+  creat: { name: 'Creatinine', conv: 'mg/dL', si: 'µmol/L', toSI: v => v * 88.4, fromSI: v => v / 88.4, dp: { conv: 2, si: 0 } },
+  uacr:  { name: 'Urine albumin-creatinine ratio', conv: 'mg/g', si: 'mg/mmol', toSI: v => v / 8.84, fromSI: v => v * 8.84, dp: { conv: 0, si: 1 } },
+  chol:  { name: 'Cholesterol', conv: 'mg/dL', si: 'mmol/L', toSI: v => v / 38.67, fromSI: v => v * 38.67, dp: { conv: 0, si: 2 } },
+  hba1c: { name: 'HbA1c', conv: '%', si: 'mmol/mol', toSI: v => (v - 2.15) * 10.929, fromSI: v => v / 10.929 + 2.15, dp: { conv: 1, si: 0 } },
+  glu:   { name: 'Glucose', conv: 'mg/dL', si: 'mmol/L', toSI: v => v / 18, fromSI: v => v * 18, dp: { conv: 0, si: 1 } },
+  len:   { name: 'Height and waist', conv: 'cm', si: 'in', toSI: v => v / 2.54, fromSI: v => v * 2.54, dp: { conv: 1, si: 1 } },
+  mass:  { name: 'Weight', conv: 'kg', si: 'lb', toSI: v => v * 2.20462, fromSI: v => v / 2.20462, dp: { conv: 1, si: 1 } }
 };
-const toDisp = (t, v) => (!t || S.units === 'conv') ? v : UNITS[t].toSI(v);
-const toBase = (t, v) => (!t || S.units === 'conv') ? v : UNITS[t].fromSI(v);
-const uLabel = t => UNITS[t][S.units];
+const U_ORDER = ['creat', 'uacr', 'chol', 'hba1c', 'glu', 'len', 'mass'];
+const SI_ALL = { creat: 'si', uacr: 'si', chol: 'si', hba1c: 'si', glu: 'si', len: 'conv', mass: 'conv' };
+const CONV_ALL = { creat: 'conv', uacr: 'conv', chol: 'conv', hba1c: 'conv', glu: 'conv', len: 'conv', mass: 'conv' };
+/* Country presets: units, default risk score, SCORE2 region and BMI cut-offs. Every item can still be changed. */
+const PRESETS = {
+  uk:     { name: 'United Kingdom', short: 'UK', u: SI_ALL, score: 'score2', region: 'low', bmiCut: 'who' },
+  eu:     { name: 'Europe', short: 'Europe', u: SI_ALL, score: 'score2', region: 'moderate', bmiCut: 'who' },
+  us:     { name: 'United States', short: 'US', u: Object.assign({}, CONV_ALL, { len: 'si', mass: 'si' }), score: 'prevent', region: 'low', bmiCut: 'who' },
+  ca:     { name: 'Canada', short: 'Canada', u: Object.assign({}, SI_ALL, { hba1c: 'conv' }), score: 'prevent', region: 'low', bmiCut: 'who' },
+  au:     { name: 'Australia', short: 'Australia', u: Object.assign({}, SI_ALL, { hba1c: 'conv' }), score: 'prevent', region: 'low', bmiCut: 'who' },
+  nz:     { name: 'New Zealand', short: 'NZ', u: SI_ALL, score: 'prevent', region: 'low', bmiCut: 'who' },
+  asiaSI: { name: 'Asia — mmol/L labs (e.g. Singapore, Malaysia)', short: 'Asia SI', u: Object.assign({}, SI_ALL, { hba1c: 'conv' }), score: 'prevent', region: 'moderate', bmiCut: 'asian' },
+  asiaC:  { name: 'Asia — mg/dL labs (e.g. Philippines, Thailand, Korea, Japan)', short: 'Asia mg/dL', u: CONV_ALL, score: 'prevent', region: 'moderate', bmiCut: 'asian' },
+  intlSI: { name: 'Other — SI units', short: 'SI', u: SI_ALL, score: 'score2', region: 'moderate', bmiCut: 'who' },
+  intlC:  { name: 'Other — conventional units', short: 'Conventional', u: CONV_ALL, score: 'prevent', region: 'moderate', bmiCut: 'who' }
+};
+const SCORE_NAME = { score2: 'SCORE2 (ESC)', prevent: 'PREVENT™ (AHA)' };
+function applyPreset(key) {
+  const p = PRESETS[key]; if (!p) return;
+  S.preset = key; S.u = Object.assign({}, p.u); S.score = p.score; S.region = p.region; S.bmiCut = p.bmiCut;
+  S.panels.ckm = p.score; savePrefs();
+}
+function presetLabel() {
+  if (!S.preset) return 'not set';
+  const p = PRESETS[S.preset];
+  const same = U_ORDER.every(t => S.u[t] === p.u[t]);
+  return same ? p.short : p.short + ' (custom)';
+}
+/* Only settings are remembered — never patient values. Storage can be blocked, so every access is guarded. */
+const PREF_KEY = 'spot.settings.v1';
+function savePrefs() { try { localStorage.setItem(PREF_KEY, JSON.stringify({ preset: S.preset, u: S.u, score: S.score, region: S.region, bmiCut: S.bmiCut, hcp: S.hcp })); } catch (e) { } }
+function loadPrefs() {
+  try {
+    const d = JSON.parse(localStorage.getItem(PREF_KEY) || 'null'); if (!d || !PRESETS[d.preset]) return false;
+    S.preset = d.preset; S.u = Object.assign({}, PRESETS[d.preset].u, d.u || {});
+    if (SCORE_NAME[d.score]) S.score = d.score;
+    if (['low', 'moderate', 'high', 'veryhigh'].includes(d.region)) S.region = d.region;
+    if (d.bmiCut === 'who' || d.bmiCut === 'asian') S.bmiCut = d.bmiCut;
+    S.hcp = d.hcp === true; S.panels.ckm = S.score; return true;
+  } catch (e) { return false; }
+}
+const uSel = t => (S.u[t] === 'si' ? 'si' : 'conv');
+const toDisp = (t, v) => (!t || uSel(t) === 'conv') ? v : UNITS[t].toSI(v);
+const toBase = (t, v) => (!t || uSel(t) === 'conv') ? v : UNITS[t].fromSI(v);
+const uLabel = t => UNITS[t][uSel(t)];
 const fmt = (v, dp) => (+(+v).toFixed(dp)).toString();
-const showLab = (t, v) => v == null ? '—' : fmt(toDisp(t, v), UNITS[t].dp[S.units]) + (uLabel(t) === '%' ? '%' : ' ' + uLabel(t));
+const showLab = (t, v) => v == null ? '—' : fmt(toDisp(t, v), UNITS[t].dp[uSel(t)]) + (uLabel(t) === '%' ? '%' : ' ' + uLabel(t));
+/* Quote a guideline threshold in the user's chosen unit first, the other unit in brackets.
+   Guideline equivalents are given explicitly (e.g. uACR 30 mg/g = 3 mg/mmol), not recalculated. */
+const tp = (t, c, s) => uSel(t) === 'si' ? `${s} (${c})` : `${c} (${s})`;
 
 /* ---------- fields ---------- */
 const FIELDS = {
   age: { label: 'Age', unit: 'years', ph: 'e.g. 64' },
-  ht: { label: 'Height', unit: 'cm', ph: 'e.g. 168' },
-  wt: { label: 'Weight', unit: 'kg', ph: 'e.g. 82' },
+  ht: { label: 'Height', ut: 'len', ph: { conv: 'e.g. 168', si: 'e.g. 66' } },
+  wt: { label: 'Weight', ut: 'mass', ph: { conv: 'e.g. 82', si: 'e.g. 180' } },
   sbp: { label: 'Systolic BP', unit: 'mmHg', ph: 'e.g. 134' },
   dbp: { label: 'Diastolic BP', unit: 'mmHg', ph: 'e.g. 82' },
   creat: { label: 'Serum creatinine', ut: 'creat', ph: { conv: 'e.g. 1.0', si: 'e.g. 88' } },
@@ -1167,22 +1267,25 @@ const FIELDS = {
   ast: { label: 'AST', unit: 'U/L', ph: 'e.g. 32' },
   alt: { label: 'ALT', unit: 'U/L', ph: 'e.g. 40' },
   plt: { label: 'Platelets', unit: '×10⁹/L', ph: 'e.g. 220' },
-  waist: { label: 'Waist circumference', unit: 'cm', ph: 'e.g. 96' }
+  waist: { label: 'Waist circumference', ut: 'len', ph: { conv: 'e.g. 96', si: 'e.g. 38' } }
 };
-const SHARED_LABELS = { age: 'Age', sex: 'Sex', ht: 'Height', wt: 'Weight', af: 'AF', sbp: 'SBP', dbp: 'DBP', creat: 'Creatinine', uacr: 'uACR', tc: 'TC', hdl: 'HDL', hba1c: 'HbA1c', dm: 'Diabetes', smoking: 'Smoking', bptreat: 'BP treatment', statin: 'Statin', htn: 'Hypertension', fpg: 'FPG', ogtt: 'OGTT', dxage: 'Age at diagnosis', ast: 'AST', alt: 'ALT', plt: 'Platelets', waist: 'Waist', ascvd: 'ASCVD', hfdx: 'HF' };
+const SHARED_LABELS = { age: 'Age', sex: 'Sex', ht: 'Height', wt: 'Weight', af: 'AF', sbp: 'SBP', dbp: 'DBP', creat: 'Creatinine', uacr: 'uACR', tc: 'TC', hdl: 'HDL', hba1c: 'HbA1c', dm: 'Diabetes', smoking: 'Smoking', bptreat: 'BP treatment', statin: 'Statin', htn: 'Hypertension', fpg: 'FPG', ogtt: 'OGTT', dxage: 'Age at diagnosis', ast: 'AST', alt: 'ALT', plt: 'Platelets', waist: 'Waist', ascvd: 'ASCVD', hfdx: 'HF', sglt2: 'SGLT2i', glp1: 'GLP-1', rasi: 'ACEi/ARB', mra: 'MRA' };
+/* Foundational cardio-renal-metabolic medicines the clinician can record (class level) */
+const MEDS = [['sglt2', 'SGLT2 inhibitor'], ['glp1', 'GLP-1 RA or GIP/GLP-1 RA'], ['rasi', 'ACE inhibitor or ARB (or ARNI)'], ['mra', 'MRA (steroidal or finerenone)']];
+const onMed = k => P[k] === '1';
 
 function numField(key, o = {}) {
   const f = FIELDS[key], v = P[key];
-  const dp = f.ut ? UNITS[f.ut].dp[S.units] : 1;
+  const dp = f.ut ? UNITS[f.ut].dp[uSel(f.ut)] : 1;
   const val = v == null ? '' : fmt(toDisp(f.ut, v), dp);
-  const ph = typeof f.ph === 'object' ? f.ph[S.units] : f.ph;
-  const unit = f.ut ? uLabel(f.ut) : f.unit;
-  return `<div class="field${o.full ? ' full' : ''}"><label for="f_${key}">${o.label || f.label} <span class="unit">(${unit})</span></label>
+  const ph = typeof f.ph === 'object' ? f.ph[uSel(f.ut)] : f.ph;
+  const unit = f.ut ? `<button type="button" class="ubtn" data-uflip="${f.ut}" aria-label="${UNITS[f.ut].name} in ${uLabel(f.ut)}. Tap to switch to ${UNITS[f.ut][uSel(f.ut) === 'si' ? 'conv' : 'si']}">${uLabel(f.ut)} ⇄</button>` : `<span class="unit">(${f.unit})</span>`;
+  return `<div class="field${o.full ? ' full' : ''}"><span class="lrow"><label for="f_${key}">${o.label || f.label}</label> ${unit}</span>
     <input id="f_${key}" data-key="${key}" type="number" inputmode="decimal" step="any" placeholder="${ph}" value="${val}">${o.hint ? `<span class="fhint">${o.hint}</span>` : ''}</div>`;
 }
 const YN = [['1', 'Yes'], ['0', 'No']];
 function segField(key, label, opts, o = {}) {
-  const cur = P[key];
+  const cur = P[key] != null ? P[key] : o.val;
   return `<div class="field${o.full ? ' full' : ''}"><span class="flabel">${label}</span>
     <div class="seg" role="group" aria-label="${label.replace(/"/g, '')}">${opts.map(([v, t]) => `<button type="button" data-seg="${key}" data-v="${v}" aria-pressed="${cur === v}" class="${cur === v ? 'on' : ''}">${t}</button>`).join('')}</div>${o.hint ? `<span class="fhint">${o.hint}</span>` : ''}</div>`;
 }
@@ -1207,7 +1310,7 @@ const RISK_RANK = { low: 0, moderate: 1, high: 2, veryhigh: 3 };
 function gCat(e) { return e >= 90 ? 0 : e >= 60 ? 1 : e >= 45 ? 2 : e >= 30 ? 3 : e >= 15 ? 4 : 5; }
 /* KDIGO albuminuria: A1 <30, A2 30–300, A3 >300 mg/g; SI equivalents 3 and 30 mg/mmol */
 function aCat(uacr) {
-  if (S.units === 'si') { const m = Math.round(uacr / 8.84 * 1e6) / 1e6; return m < 3 ? 0 : m <= 30 ? 1 : 2; }
+  if (uSel('uacr') === 'si') { const m = Math.round(uacr / 8.84 * 1e6) / 1e6; return m < 3 ? 0 : m <= 30 ? 1 : 2; }
   return uacr < 30 ? 0 : uacr <= 300 ? 1 : 2;
 }
 function kidneyResult() {
@@ -1251,34 +1354,66 @@ function preventResult() {
   return Object.assign({ model }, r);
 }
 /* CKM staging (AHA 2023 Presidential Advisory framework) */
+/* CKD category for staging. Uses the full KDIGO grid when uACR is known; with eGFR alone,
+   G3a or worse already sets a minimum category (G4–G5 = very high risk). */
 function ckdCatAuto() {
-  const k = kidneyResult(); if (!k || k.a == null) return null;
+  const k = kidneyResult(); if (!k) return null;
+  if (k.a == null) return k.g >= 4 ? 'very_high' : k.g >= 2 ? 'moderate_high' : null;
   return k.risk === 'veryhigh' ? 'very_high' : k.risk === 'low' ? 'none' : 'moderate_high';
 }
 function ckdCatEff() { return P.ckdcat || ckdCatAuto() || 'none'; }
+/* Answers SPOT can pre-fill from values entered elsewhere. Only "Yes" is ever pre-filled —
+   SPOT never assumes "No" from a missing value. Every pre-filled answer can be changed. */
+function ckmAuto(key) {
+  const b = calcBMI(), c = BMI_CUT[S.bmiCut], dx = dxResult(), e = calcEGFR();
+  if (key === 'adipose') {
+    if (b != null && b >= c.over) return { v: '1', why: `BMI ${b.toFixed(1)}` };
+    if (P.waist != null && P.sex && P.waist >= c.waist[P.sex]) return { v: '1', why: `waist ${showLab('len', P.waist)}` };
+    if (dx && dx.st.k === 'pre') return { v: '1', why: 'prediabetes result' };
+  }
+  if (key === 'htn') {
+    if (P.bptreat === '1') return { v: '1', why: 'on BP-lowering treatment' };
+    if (P.sbp != null && (P.sbp >= 130 || (P.dbp != null && P.dbp >= 80))) return { v: '1', why: `BP ${P.sbp}${P.dbp != null ? '/' + P.dbp : ''} — confirm on repeat readings` };
+  }
+  if (key === 'dm' && dx && dx.st.k === 'confirmed') return { v: '1', why: 'two results in the diabetes range' };
+  if (key === 'highrisk') {
+    const pr = preventResult(), s2 = score2Result();
+    if (pr && pr.r10_CVD != null && pr.r10_CVD >= 20) return { v: '1', why: `PREVENT™ 10-year total CVD ${pr.r10_CVD.toFixed(1)}% (≥20%)` };
+    if (s2 && s2.risk != null && s2.band.cls === 'veryhigh') return { v: '1', why: `${s2.model} ${s2.risk.toFixed(1)}% — very high risk` };
+  }
+  if (key === 'clincvd') {
+    const w = []; if (P.ascvd === '1') w.push('ASCVD'); if (P.hfdx === '1') w.push('heart failure'); if (P.af === '1') w.push('atrial fibrillation');
+    if (w.length) return { v: '1', why: w.join(', ') };
+  }
+  if (key === 'kf' && e != null && e < 15) return { v: '1', why: `eGFR ${e.toFixed(0)}` };
+  return null;
+}
+function ckmEff(key) { if (P[key] != null) return P[key]; const a = ckmAuto(key); return a ? a.v : null; }
 function ckmStage() {
   const need = ['adipose', 'htn', 'dm', 'trig', 'subclin', 'highrisk', 'clincvd', 'kf'];
-  if (need.some(k => P[k] == null)) return null;
+  if (need.some(k => ckmEff(k) == null)) return null;
+  const y = k => ckmEff(k) === '1';
   const ckd = ckdCatEff();
-  if (yn('clincvd') === 1) return yn('kf') === 1 ? '4b' : '4a';
-  if (yn('subclin') === 1 || ckd === 'very_high' || yn('highrisk') === 1) return '3';
-  if (yn('htn') === 1 || yn('dm') === 1 || yn('trig') === 1 || ckd === 'moderate_high') return '2';
-  if (yn('adipose') === 1) return '1';
+  if (y('clincvd')) return y('kf') ? '4b' : '4a';
+  if (y('subclin') || ckd === 'very_high' || y('highrisk')) return '3';
+  if (y('htn') || y('dm') || y('trig') || ckd === 'moderate_high') return '2';
+  if (y('adipose')) return '1';
   return '0';
 }
+/* Plain-language stage descriptions for primary care */
 const STAGES = {
-  '0': { label: 'Stage 0 — No CKM risk factors', desc: 'No CKM risk factors identified. Continue routine preventive care and periodic screening.' },
-  '1': { label: 'Stage 1 — Excess or dysfunctional adiposity', desc: 'Adiposity or prediabetes without other metabolic risk factors. Focus on weight and lifestyle to prevent progression.' },
-  '2': { label: 'Stage 2 — Metabolic risk factors and/or CKD', desc: 'Hypertension, diabetes, hypertriglyceridaemia and/or moderate-to-high-risk CKD, without cardiovascular disease. Treat each risk factor and monitor regularly.' },
-  '3': { label: 'Stage 3 — Subclinical CVD, very high-risk CKD or high predicted risk', desc: 'Subclinical cardiovascular disease, very high-risk CKD, or high predicted cardiovascular risk, without clinical CVD. Intensify prevention and consider specialist input.' },
-  '4a': { label: 'Stage 4a — Clinical CVD, no kidney failure', desc: 'Established cardiovascular disease without kidney failure. Coordinated, multidisciplinary management is recommended.' },
-  '4b': { label: 'Stage 4b — Clinical CVD with kidney failure', desc: 'Established cardiovascular disease with kidney failure. Coordinated, multidisciplinary management including nephrology is recommended.' }
+  '0': { label: 'Stage 0 — No CKM risk factors', desc: 'Healthy weight, normal glucose, BP, lipids and kidney tests. Keep up healthy habits and re-check at routine visits.' },
+  '1': { label: 'Stage 1 — Excess or dysfunctional adiposity', desc: 'Too much body fat (or fat in the wrong place), or prediabetes, but no other risk factors yet. This is the best time to act: weight and lifestyle support to stop it moving to Stage 2.' },
+  '2': { label: 'Stage 2 — Metabolic risk factors and/or CKD', desc: 'The patient already has a metabolic risk factor (high BP, type 2 diabetes, high triglycerides or metabolic syndrome) or chronic kidney disease, but no heart disease. Treat each risk factor to target and choose medicines that also protect the heart and kidneys.' },
+  '3': { label: 'Stage 3 — Silent heart disease, very high-risk CKD or high predicted risk', desc: 'No symptoms of heart disease yet, but there is early (subclinical) heart or artery damage, very high-risk CKD, or a high predicted risk on a risk score. Prevention should be intensified now, and specialist input considered.' },
+  '4a': { label: 'Stage 4a — Clinical cardiovascular disease', desc: 'Established heart or vascular disease (coronary disease, heart failure, stroke, peripheral artery disease or AF) without kidney failure. Secondary prevention with coordinated care.' },
+  '4b': { label: 'Stage 4b — Clinical cardiovascular disease with kidney failure', desc: 'Established heart or vascular disease and kidney failure. Coordinated care with nephrology and cardiology.' }
 };
 
 /* ---------- guidelines (core = visible; local/regional = stored, hidden) ---------- */
 const GUIDES = {
   hf: [
-    { cite: 'Køber L, Adamo M, Ruwald AC, et al. 2026 ESC Guidelines for the management of heart failure. Eur Heart J. 2026; ehag100.', url: 'https://doi.org/10.1093/eurheartj/ehag100', visible: true },
+    { cite: 'Køber L, Adamo M, Ruwald AC, et al. 2026 ESC Guidelines for the management of heart failure. Eur Heart J. 2026;47(38):5346–5457.', url: 'https://doi.org/10.1093/eurheartj/ehag100', visible: true },
     { cite: 'Heidenreich PA, Bozkurt B, Aguilar D, et al. 2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure. Circulation. 2022;145(18):e895–e1032.', url: 'https://doi.org/10.1161/CIR.0000000000001063', visible: true },
     { cite: '2026 ACC Expert Consensus Decision Pathway: Management of Heart Failure With Preserved Ejection Fraction. J Am Coll Cardiol. 2026.', url: 'https://doi.org/10.1016/j.jacc.2026.06.018', visible: true },
     { cite: 'McDonagh TA, Metra M, Adamo M, et al. 2021 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure. Eur Heart J. 2021;42(36):3599–3726.', url: 'https://doi.org/10.1093/eurheartj/ehab368', visible: false, scope: 'superseded by ESC 2026' },
@@ -1294,7 +1429,8 @@ const GUIDES = {
     { cite: 'Kidney Disease: Improving Global Outcomes (KDIGO) CKD Work Group. KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease. Kidney Int. 2024;105(4S):S117–S314.', url: 'https://doi.org/10.1016/j.kint.2023.10.018', visible: true },
     { cite: 'Damman K, Herrington W, et al. 2026 ESC Guidelines for the management of cardiovascular disease and chronic kidney disease (with the European Renal Association). Eur Heart J. 2026; ehag098.', url: 'https://doi.org/10.1093/eurheartj/ehag098', visible: true },
     { cite: 'KDIGO Blood Pressure Work Group. KDIGO 2021 Clinical Practice Guideline for the Management of Blood Pressure in Chronic Kidney Disease. Kidney Int. 2021;99(3S):S1–S87.', url: 'https://doi.org/10.1016/j.kint.2020.11.003', visible: true },
-    { cite: 'KDIGO Diabetes Work Group. KDIGO 2022 Clinical Practice Guideline for Diabetes Management in Chronic Kidney Disease. Kidney Int. 2022;102(5S):S1–S127. (A 2026 focused update is in development.)', url: 'https://doi.org/10.1016/j.kint.2022.06.008', visible: true },
+    { cite: 'KDIGO Diabetes Work Group. KDIGO 2026 Clinical Practice Guideline for Diabetes Management in Chronic Kidney Disease. Public review draft, March 2026. (Final version pending — content will be re-checked on publication.)', url: '', visible: true },
+    { cite: 'KDIGO Diabetes Work Group. KDIGO 2022 Clinical Practice Guideline for Diabetes Management in Chronic Kidney Disease. Kidney Int. 2022;102(5S):S1–S127.', url: 'https://doi.org/10.1016/j.kint.2022.06.008', visible: false, scope: 'superseded by KDIGO 2026 draft' },
     { cite: 'Inker LA, Eneanya ND, Coresh J, et al. New creatinine- and cystatin C-based equations to estimate GFR without race. N Engl J Med. 2021;385(19):1737–1749.', url: 'https://doi.org/10.1056/NEJMoa2102953', visible: true },
     { cite: 'Framework of guidelines for management of CKD in Asia. Kidney Int Rep. 2024;9(4):752–790.', url: 'https://www.kireports.org/article/S2468-0249(23)01632-7/fulltext', visible: false, scope: 'APAC' },
     { cite: 'Asian Pacific Society of Nephrology. Clinical practice guideline on diabetic kidney disease. Nephrology (Carlton). 2020;25(Suppl 2):12–45.', url: '', visible: false, scope: 'APAC' },
@@ -1313,12 +1449,13 @@ const GUIDES = {
     { cite: 'Damman K, Herrington W, et al. 2026 ESC Guidelines for the management of cardiovascular disease and chronic kidney disease. Eur Heart J. 2026; ehag098.', url: 'https://doi.org/10.1093/eurheartj/ehag098', visible: true }
   ],
   t2d: [
-    { cite: 'Davies MJ, et al. Management of type 2 diabetes, 2026. A consensus report by the American Diabetes Association (ADA) and the European Association for the Study of Diabetes (EASD). Diabetes Care. 2026 / Diabetologia. 2026.', url: 'https://doi.org/10.2337/dci26-0141', visible: true },
+    { cite: 'Davies MJ, et al. Management of type 2 diabetes, 2026. A consensus report by the American Diabetes Association (ADA) and the European Association for the Study of Diabetes (EASD). Diabetes Care. 2026;49:1–45.', url: 'https://doi.org/10.2337/dci26-0141', visible: true },
     { cite: 'American Diabetes Association Professional Practice Committee. Standards of Care in Diabetes—2026. Diabetes Care. 2026;49(Suppl 1).', url: 'https://diabetesjournals.org/care/issue/49/Supplement_1', visible: true },
     { cite: 'Davies MJ, Aroda VR, Collins BS, et al. Management of hyperglycemia in type 2 diabetes, 2022. A consensus report by the ADA and the EASD. Diabetes Care. 2022;45(11):2753–2786.', url: 'https://doi.org/10.2337/dci22-0034', visible: false, scope: 'superseded by ADA/EASD 2026' },
     { cite: 'Marx N, Federici M, Schütt K, et al. 2023 ESC Guidelines for the management of cardiovascular disease in patients with diabetes. Eur Heart J. 2023;44(39):4043–4140.', url: 'https://doi.org/10.1093/eurheartj/ehad192', visible: true },
-    { cite: 'KDIGO Diabetes Work Group. KDIGO 2022 Clinical Practice Guideline for Diabetes Management in Chronic Kidney Disease. Kidney Int. 2022;102(5S):S1–S127. (A 2026 focused update is in development.)', url: 'https://doi.org/10.1016/j.kint.2022.06.008', visible: true },
-    { cite: 'Køber L, Adamo M, Ruwald AC, et al. 2026 ESC Guidelines for the management of heart failure. Eur Heart J. 2026; ehag100.', url: 'https://doi.org/10.1093/eurheartj/ehag100', visible: true },
+    { cite: 'KDIGO Diabetes Work Group. KDIGO 2026 Clinical Practice Guideline for Diabetes Management in Chronic Kidney Disease. Public review draft, March 2026. (Final version pending — content will be re-checked on publication.)', url: '', visible: true },
+    { cite: 'KDIGO Diabetes Work Group. KDIGO 2022 Clinical Practice Guideline for Diabetes Management in Chronic Kidney Disease. Kidney Int. 2022;102(5S):S1–S127.', url: 'https://doi.org/10.1016/j.kint.2022.06.008', visible: false, scope: 'superseded by KDIGO 2026 draft' },
+    { cite: 'Køber L, Adamo M, Ruwald AC, et al. 2026 ESC Guidelines for the management of heart failure. Eur Heart J. 2026;47(38):5346–5457.', url: 'https://doi.org/10.1093/eurheartj/ehag100', visible: true },
     { cite: 'EASL–EASD–EASO Clinical Practice Guidelines on the management of metabolic dysfunction-associated steatotic liver disease (MASLD). J Hepatol. 2024;81(3):492–542.', url: 'https://doi.org/10.1016/j.jhep.2024.04.031', visible: true },
     { cite: 'Sterling RK, Lissen E, Clumeck N, et al. Development of a simple noninvasive index to predict significant fibrosis in patients with HIV/HCV coinfection (FIB-4). Hepatology. 2006;43(6):1317–1325.', url: 'https://doi.org/10.1002/hep.21178', visible: true }
   ],
@@ -1357,13 +1494,23 @@ const ICON = {
    ===================================================================== */
 const MODS = {};
 const STEP_NAMES = { s: 'Study', p: 'Pick up', o: 'Order & score', t: 'Take action' };
+/* Shared wording, so the Kidney and Type 2 Diabetes modules say exactly the same thing */
+const FIVE_S = `<div class="fives"><b class="t">The five S's — 24-hour behaviours</b><ol>
+  <li><b>Standing</b> — break up long periods of sitting</li><li><b>Stepping</b> — about 6,000–10,000 steps a day</li>
+  <li><b>Sweating</b> — at least 150 minutes a week of moderate-to-vigorous activity</li><li><b>Strengthening</b> — resistance training 2–3 times a week, with enough protein (important on GLP-1-based therapy)</li>
+  <li><b>Sleep</b> — 7–8 hours a night</li></ol><span class="src">ADA/EASD 2026</span></div>`;
+const RASI_TXT = () => `<b>ACE inhibitor or ARB</b> titrated to the highest approved dose that is tolerated — recommended in diabetes with hypertension and albuminuria, and in CKD with uACR ≥${tp('uacr', '300 mg/g', '30 mg/mmol')} (A3). Check BP, eGFR and potassium within 2–4 weeks of starting or increasing the dose; continue unless eGFR falls by more than 30%.`;
+const FINER_TXT = () => `<b>Finerenone</b> (non-steroidal MRA) for T2D with eGFR ≥25, <b>normal potassium</b> and uACR ≥${tp('uacr', '30 mg/g', '3 mg/mmol')} while on a <b>maximally tolerated ACE inhibitor or ARB</b>; it can be started together with an SGLT2 inhibitor. Check potassium and eGFR about 4 weeks after starting, then regularly. Do not combine with a steroidal MRA.`;
+const SGLT2_CKD_TXT = () => `<b>SGLT2 inhibitor</b> for T2D with CKD and eGFR ≥20 — first for heart and kidney protection, even when glucose is at target. An early, small dip in eGFR is expected and is not a reason to stop; no extra blood tests are needed just because it was started. Once started, continue below eGFR 20 unless not tolerated or dialysis begins.`;
+const GLP1_CKD_TXT = () => `<b>GLP-1-based therapy</b> with proven heart or kidney benefit for T2D with CKD at high cardiovascular or kidney risk — especially with established ASCVD or uACR ≥${tp('uacr', '100 mg/g', '11 mg/mmol')} despite the treatments above — or when glucose targets are not met.`;
+const METF_CKD_TXT = `<b>Metformin</b> (eGFR ≥30) if glucose targets are not met on an SGLT2 inhibitor and GLP-1-based therapy, or if those cannot be used. Reduce the dose below eGFR 45; check vitamin B12 after about 4 years of use.`;
 
 /* ---------------- HEART FAILURE ---------------- */
 MODS.hf = {
   title: 'Heart Failure', sub: 'Recognise heart failure early — especially HFpEF, the type most often missed.',
   checks: {
-    sym: ['Breathlessness on exertion', 'Reduced exercise tolerance or unexplained fatigue', 'Orthopnoea or waking at night breathless', 'Ankle, leg or abdominal swelling', 'Rapid weight gain over a few days', 'Raised jugular venous pressure or lung crackles on examination'],
-    risk: ['Age 65 or older', 'Hypertension', 'Atrial fibrillation', 'Obesity', 'Type 2 diabetes', 'Coronary artery disease or prior myocardial infarction', 'Chronic kidney disease']
+    sym: ['Breathlessness on exertion', 'Reduced exercise tolerance or unexplained fatigue', 'Orthopnoea or waking at night breathless', 'Breathless when bending forward (bendopnoea)', 'Ankle, leg or abdominal swelling', 'Rapid weight gain over a few days', 'Raised jugular venous pressure, third heart sound or lung crackles on examination', 'Palpitations or new atrial fibrillation'],
+    risk: ['Age 65 or older', 'Hypertension', 'Atrial fibrillation', 'Obesity', 'Type 2 diabetes', 'Coronary artery disease or prior myocardial infarction', 'Chronic kidney disease', 'Obstructive sleep apnoea', 'Previous hospital admission with breathlessness or "chest infection" that responded to diuretics']
   },
   s() {
     return `
@@ -1382,6 +1529,7 @@ MODS.hf = {
     <div class="card"><h2>The tools in this module</h2>
       <h3>HFpEF-ABA score</h3>
       <p>Developed by Reddy and colleagues (Nature Medicine, 2024), HFpEF-ABA estimates the probability of HFpEF from <b>A</b>ge, <b>B</b>MI and <b>A</b>trial fibrillation alone — no echocardiogram needed — making it practical in a routine consultation.</p>
+      <div class="callout warn"><b>A first filter, not a diagnosis</b>Three variables cannot capture every patient. HFpEF-ABA can under-estimate risk in younger or leaner people, and in people with other drivers such as diabetes, CKD or coronary disease. Use it together with the full picture — symptoms, signs, risk factors, a natriuretic peptide or ECG — and let echocardiography confirm. <b>A low score never overrides clinical suspicion.</b></div>
       <h3>Natriuretic peptides and ECG</h3>
       <p>NT-proBNP or BNP help rule heart failure in or out before echocardiography. Where they are not available, a 12-lead ECG helps: a completely normal ECG makes HF less likely.</p>
       <p class="hint">SPOT uses the established ESC rule-out values for the non-decompensated setting (NT-proBNP &lt;125 pg/mL, BNP &lt;35 pg/mL).</p>
@@ -1421,7 +1569,7 @@ MODS.hf = {
     if (r) {
       if (p == null) r.innerHTML = `<h2>HFpEF probability</h2><p class="hint">Enter age, height, weight and AF status.</p><span class="badge b-neutral">Awaiting values</span>`;
       else {
-        const m = { low: ['b-low', 'Low probability', 'var(--ok)', 'HFpEF is unlikely on this screen. Consider other causes of the symptoms and reassess if they progress.'], interm: ['b-interm', 'Intermediate probability', 'var(--amber)', 'Check a natriuretic peptide (or ECG if unavailable) to decide on echocardiography.'], high: ['b-veryhigh', 'High probability', 'var(--red)', 'Refer for echocardiography and cardiology assessment. A natriuretic peptide can support the referral.'] }[tier];
+        const m = { low: ['b-low', 'Low probability', 'var(--ok)', 'HFpEF is less likely on this score, but the score is only a first filter. If the patient has symptoms or signs, still check a natriuretic peptide (or ECG).'], interm: ['b-interm', 'Intermediate probability', 'var(--amber)', 'Check a natriuretic peptide (or ECG if unavailable) to decide on echocardiography.'], high: ['b-veryhigh', 'High probability', 'var(--red)', 'Refer for echocardiography and cardiology assessment. A natriuretic peptide can support the referral.'] }[tier];
         r.innerHTML = `<h2>HFpEF probability</h2><div class="big">${p.toFixed(1)}<span style="font-size:20px">%</span></div><span class="badge ${m[0]}">${m[1]}</span>
           <div class="meter"><i style="width:${Math.min(100, p)}%;background:${m[2]}"></i></div><div class="meter-scale"><span>0</span><span>20</span><span>70</span><span>100</span></div>
           <div class="callout ${tier === 'low' ? 'good' : tier === 'interm' ? 'warn' : 'bad'}"><b>Next step</b>${m[3]}</div>
@@ -1449,7 +1597,11 @@ MODS.hf = {
     if (nx === 'np_high' || nx === 'ecg_abnormal' || tier === 'high') action = 'Refer for echocardiography to confirm heart failure and its type. Start with block 1, then use block 3 for referral.';
     else if (nx === 'np_low' || nx === 'ecg_normal') action = 'Heart failure is less likely. Look for other causes (block 1) and reassess if symptoms change.';
     else if (tier === 'interm') action = 'Order a natriuretic peptide, or an ECG if unavailable, to decide on echocardiography.';
-    else action = 'HFpEF unlikely on the score. Consider other causes; reassess if symptoms progress.';
+    else {
+      const sym = (S.checks.hf || []).filter(x => x.startsWith('sym')).length;
+      action = sym ? 'HFpEF-ABA is low, but symptoms were ticked in Pick up — a low score does not rule out heart failure. <b>Check NT-proBNP or BNP (or an ECG)</b> before looking for other causes.'
+        : 'HFpEF less likely on the score. If the patient is breathless or fatigued, still check a natriuretic peptide (or ECG); otherwise reassess if symptoms appear.';
+    }
     return `<p>${parts.join(' · ')}.</p><p><b>Suggested focus:</b> ${action}</p>`;
   },
   t() {
@@ -1464,16 +1616,17 @@ MODS.hf = {
       start: `<ul>
         <li><b>Relieve congestion:</b> a diuretic is recommended for fluid overload in all HF types.</li>
         <li><b>Treat contributors:</b> blood pressure, AF (rate/rhythm control and stroke prevention), obesity, diabetes and CKD.</li>
-        <li><b>Monitor:</b> symptoms, weight, BP, heart rate, creatinine and potassium after starting or changing diuretics, RAS inhibitors or MRAs.</li></ul>
+        <li><b>Monitor:</b> symptoms, weight, BP, heart rate, creatinine and potassium after starting or changing diuretics, RAS inhibitors or MRAs.</li>
+        <li><b>Exercise:</b> exercise training and cardiac rehabilitation for all stable patients (ESC 2026, Class I).</li></ul>
         <p style="font-size:13.5px;margin:10px 0 4px"><b>Once echocardiography confirms the phenotype</b> — foundational medical therapy (ESC 2026):</p>
         <div class="type-tabs" style="grid-template-columns:1fr">
-        <div class="tt"><b>HFrEF (LVEF &lt;50%)</b>Four foundational classes, each Class I:<ul><li>Beta-blocker</li><li>ACE inhibitor, ARNI or ARB</li><li>Mineralocorticoid receptor antagonist (MRA) — steroidal MRA, or finerenone (newly listed in ESC 2026)</li><li>SGLT2 inhibitor</li></ul>Start early and up-titrate at least every 1–2 weeks where feasible, usually with specialist input. Additional therapies in selected patients: ivabradine, vericiguat, digoxin or digitoxin.</div>
-        <div class="tt"><b>HFpEF (LVEF ≥50%)</b>Two foundational classes, each Class I:<ul><li>SGLT2 inhibitor</li><li>MRA (Class I in chronic HF regardless of LVEF)</li></ul>Plus: diuretic for congestion; <strong>semaglutide or tirzepatide</strong> for symptomatic HF with LVEF ≥45% and BMI ≥30 kg/m², with or without diabetes (Class IIa); ACE inhibitor, ARB or ARNI may be considered; treat hypertension, AF, diabetes and CKD.</div>
+        <div class="tt"><b>HFrEF (LVEF &lt;50%)</b>Four foundational classes, each Class I:<ul><li>Beta-blocker</li><li>ACE inhibitor, ARNI or ARB</li><li>Steroidal mineralocorticoid receptor antagonist (MRA: spironolactone or eplerenone)</li><li>SGLT2 inhibitor</li></ul>Start early and up-titrate at least every 1–2 weeks where feasible, usually with specialist input. Additional therapies in selected patients: ivabradine, vericiguat, digoxin or digitoxin.</div>
+        <div class="tt"><b>HFpEF (LVEF ≥50%)</b>Two foundational classes, each Class I:<ul><li>SGLT2 inhibitor</li><li>MRA — steroidal MRA or finerenone (non-steroidal MRA); Class I in symptomatic HF regardless of LVEF (ESC 2026)</li></ul>Plus: diuretic for congestion; <strong>semaglutide or tirzepatide</strong> for symptomatic HF with LVEF ≥45% and BMI ≥30 kg/m², with or without diabetes (Class IIa); ACE inhibitor, ARB or ARNI may be considered; treat hypertension, AF, diabetes and CKD.</div>
         <div class="tt"><b>Prevent progression (stages A and B)</b><ul><li>Systolic BP target &lt;130 mmHg</li><li>Type 2 diabetes with cardiovascular risk: SGLT2 inhibitor; consider a GLP-1 receptor agonist</li><li>Stage B with LVEF &lt;50%: beta-blocker; with LVEF ≤40%: ACE inhibitor (or ARB)</li><li>Lifestyle counselling for all</li></ul></div></div>
         <p class="src">ESC 2026 · AHA/ACC/HFSA 2022 · ACC 2026 HFpEF pathway</p>`,
       refer: `<ul>
         <li><b>Urgent / same day:</b> breathlessness at rest, chest pain, syncope, systolic BP &lt;90 mmHg, low oxygen saturation, or a new fast or irregular rhythm with instability.</li>
-        <li><b>For echocardiography and cardiology review:</b> natriuretic peptide at or above threshold, abnormal ECG with suspected HF, or high HFpEF-ABA probability.</li>
+        <li><b>For echocardiography and cardiology review:</b> natriuretic peptide at or above threshold, abnormal ECG with suspected HF, high HFpEF-ABA probability, <b>or strong clinical suspicion even when the score is low</b>.</li>
         <li><b>Specialist-led care:</b> confirmed HFrEF (LVEF &lt;50%) for rapid initiation and up-titration of foundational therapy (per local pathway), recurrent decompensation, suspected advanced HF (stage D), or uncertainty about the diagnosis.</li></ul>
         <p class="src">Include in the referral: symptoms, examination, ECG, natriuretic peptide, eGFR and medications.</p>`
     });
@@ -1519,7 +1672,7 @@ MODS.kidney = {
         <div class="fgrid">${numField('age')}${segField('sex', 'Sex', [['f', 'Female'], ['m', 'Male']])}${numField('creat')}
           <div class="field"><span class="flabel">Calculated eGFR</span><div class="calc" id="egfrOut">—</div></div></div>
         <div class="subhead">Albuminuria</div>
-        <div class="fgrid">${numField('uacr', { full: true, hint: 'A negative or trace dipstick does not reliably exclude moderately increased albuminuria (A2).' })}</div>
+        <div class="fgrid">${numField('uacr', { full: true, hint: 'A negative or trace dipstick does not reliably exclude moderately increased albuminuria (A2). If lab uACR is not available, a point-of-care uACR strip is an acceptable alternative (KDIGO 2026 draft).' })}</div>
         <div class="subhead">Blood pressure</div>
         <div class="fgrid">${numField('sbp')}${numField('dbp')}</div>
       </div></div>
@@ -1558,12 +1711,14 @@ MODS.kidney = {
     let action = '';
     if (k) {
       if (k.a == null) action = 'Order uACR to complete the assessment, and repeat eGFR to confirm chronicity.';
-      else if (k.risk === 'veryhigh') action = 'Refer to nephrology (block 3) and start kidney-protective therapy where appropriate (block 2).';
+      else if (k.risk === 'veryhigh') action = '<b>Treat first, then refer:</b> start or optimise kidney-protective therapy now (block 2) and refer to nephrology (block 3). Do not wait for the specialist appointment to start treatment (KDIGO 2024).';
       else if (k.risk === 'high') action = 'Confirm chronicity, start kidney-protective therapy (block 2), monitor about twice a year and review referral criteria.';
       else if (k.risk === 'moderate') action = 'Confirm chronicity (block 1), manage risk factors and kidney-protective therapy (block 2), recheck at least yearly.';
       else action = 'No CKD on these results. Keep up risk-factor control and repeat the kidney health check yearly if at risk.';
     }
     if (st && (st.cls === 'high' || st.cls === 'veryhigh')) action += ' Address blood pressure.';
+    const on = MEDS.filter(([m]) => onMed(m)).map(([, l]) => l.split(' (')[0]);
+    if (on.length) parts.push('on ' + on.join(', '));
     return `<p>${parts.join(' · ')}.</p>${action ? `<p><b>Suggested focus:</b> ${action}</p>` : ''}`;
   },
   t() {
@@ -1576,21 +1731,25 @@ MODS.kidney = {
         <p class="src">KDIGO 2024</p>`,
       start: `<ul>
         <li><b>Blood pressure:</b> systolic target &lt;120 mmHg when tolerated, using standardised measurement (KDIGO 2021).</li>
-        <li><b>RAS inhibitor</b> (ACE inhibitor or ARB) at the maximum tolerated dose — recommended with severely increased albuminuria (A3), and with moderately increased albuminuria (A2) in diabetes.</li>
-        <li><b>RAS inhibitor plus SGLT2 inhibitor</b> for most people with CKD (ESC/ERA 2026). SGLT2 inhibitor per KDIGO 2024 — recommended with T2D and eGFR ≥20; and without diabetes when eGFR ≥20 with uACR ≥200 mg/g (≥20 mg/mmol) or heart failure; suggested with eGFR 20–45 and uACR &lt;200 mg/g. Once started, continue below eGFR 20 until kidney replacement therapy.</li>
-        <li><b>T2D with albuminuria:</b> finerenone (non-steroidal MRA) if eGFR ≥25 and potassium normal, on a RAS inhibitor; and a GLP-1 receptor agonist (semaglutide) for kidney and cardiovascular protection (ESC/ERA 2026; KDIGO 2022).</li>
+        <li>${RASI_TXT()}</li>
+        <li><b>RAS inhibitor plus SGLT2 inhibitor</b> for most people with CKD (ESC/ERA 2026). Without diabetes, an SGLT2 inhibitor is recommended when eGFR ≥20 with uACR ≥${tp('uacr', '200 mg/g', '20 mg/mmol')} or heart failure, and suggested with eGFR 20–45 and lower uACR (KDIGO 2024). Once started, continue below eGFR 20 until kidney replacement therapy.</li>
+        <li><b>With type 2 diabetes</b> (KDIGO 2026 draft) — the same wording appears in the Type 2 Diabetes module:<ul>
+          <li>${SGLT2_CKD_TXT()}</li><li>${FINER_TXT()}</li><li>${GLP1_CKD_TXT()}</li><li>${METF_CKD_TXT}</li></ul></li>
         <li><b>Statin</b> (with or without ezetimibe) for CKD not on dialysis, regardless of lipid levels (ESC/ERA 2026); KDIGO recommends a statin for adults aged 50 or older with CKD.</li>
         <li><b>AF with CKD:</b> direct oral anticoagulants preferred over vitamin K antagonists when eGFR &gt;30 (ESC/ERA 2026).</li>
         <li><b>Safety:</b> avoid NSAIDs, adjust doses to eGFR, give sick-day guidance, and check creatinine and potassium 2–4 weeks after starting or increasing RAS inhibitors or MRAs.</li>
-        <li><b>Lifestyle:</b> stop smoking, stay active, healthy weight, sodium &lt;2 g/day.</li>
+        <li><b>Lifestyle:</b> stop smoking, at least 150 minutes a week of moderate activity, healthy weight, sodium &lt;2 g/day (about 5 g salt), protein about 0.8 g/kg/day.</li>
+        <li><b>Self-management education</b> for people with diabetes and CKD (KDIGO 2026 draft).</li>
         <li><b>Monitoring:</b> moderately increased risk — at least yearly; high — about twice a year; very high — three or more times a year.</li></ul>
-        <p class="src">KDIGO 2024 · ESC/ERA 2026 · KDIGO 2022 Diabetes in CKD · KDIGO 2021 BP</p>`,
-      refer: `<ul>
-        <li>eGFR &lt;30 mL/min/1.73m² (G4–G5). For G3–G5, the Kidney Failure Risk Equation (KFRE) helps time referral (ESC/ERA 2026, KDIGO 2024).</li>
-        <li>Persistent uACR ≥300 mg/g (≥30 mg/mmol), category A3.</li>
+        <p class="src">KDIGO 2024 · ESC/ERA 2026 · KDIGO 2026 Diabetes in CKD (draft) · KDIGO 2021 BP</p>`,
+      refer: `<p style="font-size:13.5px;margin:0 0 6px"><b>Treat first, then refer.</b> Start or optimise kidney-protective therapy before and while waiting for the referral — too many patients are referred without treatment being started.</p><ul>
+        <li>eGFR &lt;30 mL/min/1.73m² (G4–G5).</li>
+        <li><b>Kidney Failure Risk Equation (KFRE)</b> for G3–G5: a <b>5-year kidney failure risk of 3–5% or more</b> can support referral, alongside eGFR, albuminuria and other clinical factors (KDIGO 2024). Calculate it at <a href="https://kidneyfailurerisk.com" target="_blank" rel="noopener noreferrer">kidneyfailurerisk.com</a>.</li>
+        <li>Persistent uACR ≥${tp('uacr', '300 mg/g', '30 mg/mmol')}, category A3.</li>
         <li>Rapid progression — a sustained fall in eGFR of ≥25% with a change in category.</li>
         <li>Acute kidney injury or an abrupt, sustained fall in eGFR.</li>
-        <li>Unexplained haematuria, persistent hyperkalaemia, resistant hypertension (≥4 agents), recurrent kidney stones or suspected hereditary kidney disease.</li></ul>
+        <li>Unexplained haematuria, persistent hyperkalaemia, resistant hypertension (≥4 agents), recurrent kidney stones or suspected hereditary kidney disease.</li>
+        <li><b>In diabetes</b>, signs that CKD may have another cause: active urine sediment, rapidly rising uACR or falling eGFR, no retinopathy, or CKD within 5 years of type 1 diabetes (KDIGO 2026 draft).</li></ul>
         <p class="src">KDIGO 2024 · ESC/ERA 2026. Include eGFR trend, uACR results, BP readings and medications.</p>`
     });
   }
@@ -1614,6 +1773,13 @@ MODS.ckm = {
         <li><b>Stage 2</b> — metabolic risk factors (hypertension, type 2 diabetes, hypertriglyceridaemia, metabolic syndrome) and/or moderate-to-high-risk CKD.</li>
         <li><b>Stage 3</b> — subclinical cardiovascular disease (e.g. coronary calcium or subclinical heart failure), very high-risk CKD, or high predicted cardiovascular risk.</li>
         <li><b>Stage 4</b> — clinical cardiovascular disease: 4a without kidney failure, 4b with kidney failure.</li></ul></div>
+    <div class="card"><h2>CKM in practice: what the stage tells a GP</h2>
+      <p>Think of CKM staging as a ladder. Each step up means the same patient now carries more combined heart, kidney and metabolic risk — and the job shifts from prevention to protection.</p>
+      <ul><li><b>Stage 1 → act on weight and prediabetes</b> to stop the climb.</li>
+      <li><b>Stage 2 → treat every risk factor to target</b> — BP, glucose, lipids — and pick medicines that also protect the heart and kidneys (for example SGLT2 inhibitors or GLP-1-based therapy where indicated).</li>
+      <li><b>Stage 3 → intensify</b>: the patient behaves like someone who already has heart disease, so treat with the same urgency.</li>
+      <li><b>Stage 4 → secondary prevention</b> and coordinated care across specialties.</li></ul>
+      <p class="hint">Why stage at all? A patient with "mild" diabetes, "borderline" BP and a slightly low eGFR can be Stage 3 once these are counted together. The stage makes that combined risk visible.</p></div>
     <div class="card"><h2>Why it gets missed</h2>
       <p>Obesity, diabetes, hypertension and kidney disease are usually tracked as separate problems, so their combined effect is easy to underestimate. A patient with well-controlled diabetes and borderline blood pressure may still carry high combined risk once kidney function and other factors are considered together.</p></div>
     <div class="card"><h2>The PREVENT™ equations</h2>
@@ -1623,6 +1789,8 @@ MODS.ckm = {
       <p>The European Society of Cardiology risk models estimate 10-year risk of fatal and non-fatal cardiovascular disease (heart attack, stroke, cardiovascular death), recalibrated to four European risk regions:</p>
       <ul><li><b>SCORE2</b> — ages 40–69 without diabetes</li><li><b>SCORE2-OP</b> — ages 70–89</li><li><b>SCORE2-Diabetes</b> — ages 40–69 with type 2 diabetes; adds age at diagnosis, HbA1c and eGFR</li></ul>
       <p class="hint">Not intended for people with established atherosclerotic CVD, or with CKD or familial hypercholesterolaemia, who are already at high or very high risk under ESC guidance.</p></div>
+    <div class="card"><h2>Which score should I use?</h2>
+      <p>Use the score your national guideline recommends. SPOT shows <b>SCORE2</b> first for the UK and Europe, and <b>PREVENT™</b> first for the US, Canada, Australia, New Zealand and Asia — switch with the <b>Units</b> button, or simply open the other tab. PREVENT™ also gives a <b>30-year risk</b> (ages 30–59), which helps explain lifetime risk to younger patients whose 10-year risk still looks low.</p></div>
     <div class="card"><h2>Guidelines & sources</h2>${refList('ckm')}</div>
     <div class="next-row"><a class="btn ghost" href="#/m/ckm/p">P · Pick up the risk →</a><a class="btn" href="#/m/ckm/o">O · Order & score →</a></div>`;
   },
@@ -1633,24 +1801,34 @@ MODS.ckm = {
     return { cls: 'neutral', t: 'No major risk conditions selected', b: 'If clinical suspicion remains for another reason, you can still stage and calculate risk.' };
   },
   o() {
+    const first = S.score === 'score2' ? [['score2', 'SCORE2 risk'], ['prevent', 'PREVENT™ risk']] : [['prevent', 'PREVENT™ risk'], ['score2', 'SCORE2 risk']];
+    if (!['stage', 'prevent', 'score2'].includes(S.panels.ckm)) S.panels.ckm = S.score;
     const panel = S.panels.ckm;
-    return miniTabs('ckm', [['stage', 'CKM stage'], ['prevent', 'PREVENT™ risk'], ['score2', 'SCORE2 risk']]) + (panel === 'stage' ? this.stagePanel() : panel === 'prevent' ? this.preventPanel() : this.score2Panel());
+    return `<p class="hint" style="margin:0 0 10px">Start with a risk score, then stage CKM. ${S.score === 'score2' ? 'SCORE2' : 'PREVENT™'} is shown first for <b>${presetLabel()}</b> — <button type="button" class="linkbtn" data-openunits>change</button>.</p>` +
+      miniTabs('ckm', [...first, ['stage', 'CKM stage']]) + (panel === 'stage' ? this.stagePanel() : panel === 'prevent' ? this.preventPanel() : this.score2Panel());
   },
   stagePanel() {
     const auto = ckdCatAuto(), eff = ckdCatEff();
-    return `<div class="cols"><div><div class="card"><h2>CKM stage</h2><p class="hint">AHA 2023 framework. The stage is based only on the answers below.</p>
+    const CKD_TXT = { none: 'no CKD', moderate_high: 'moderately increased or high risk', very_high: 'very high risk' };
+    const ckdHint = P.ckdcat && auto && P.ckdcat !== auto ? `You changed this. From the Kidney Health values SPOT would choose <b>${CKD_TXT[auto]}</b>.`
+      : auto ? `Pre-filled from the kidney values (${CKD_TXT[auto]}${kidneyResult() && kidneyResult().a == null ? ', eGFR only — add uACR to complete' : ''}). You can change it.`
+      : 'Enter creatinine (and uACR) in Kidney Health or Spot my patient to pre-fill this.';
+    const sf = (key, label, o = {}) => { const a = P[key] == null ? ckmAuto(key) : null; return segField(key, label, o.opts || YN, Object.assign({}, o, { val: a ? a.v : undefined, hint: (a ? `<b>Pre-filled: Yes</b> — ${a.why}. Tap to change. ` : '') + (o.hint || '') })); };
+    const pr = preventResult(), s2 = score2Result();
+    return `<div class="cols"><div><div class="card"><h2>CKM stage</h2><p class="hint">AHA 2023 framework and 2026 AHA/ACC/ADA/ASN CKM guideline. Answers SPOT can work out from values you already entered are pre-filled.</p>
       <div class="subhead">Adiposity</div>
-      <div class="fgrid">${segField('adipose', 'Excess or dysfunctional adiposity, or prediabetes?', YN, { full: true, hint: 'BMI ≥25 kg/m² (≥23 Asian ancestry), or waist ≥88 cm women / ≥102 cm men (≥80 / ≥90 cm Asian ancestry), or prediabetes.' + (calcBMI() ? ` Entered BMI: <b>${calcBMI().toFixed(1)}</b>.` : '') })}</div>
+      <div class="fgrid">${sf('adipose', 'Excess or dysfunctional adiposity, or prediabetes?', { full: true, hint: `BMI ≥25 kg/m² (≥23 Asian ancestry), or waist ≥${tp('len', '88 cm', '34.6 in')} women / ≥${tp('len', '102 cm', '40.2 in')} men (≥80 / ≥90 cm Asian ancestry), or prediabetes.` })}</div>
       <div class="subhead">Metabolic risk factors</div>
-      <div class="fgrid">${segField('htn', 'Hypertension', YN)}${segField('dm', 'Diabetes', YN)}${segField('trig', 'Hypertriglyceridaemia or metabolic syndrome', YN, { full: true, hint: 'Triglycerides ≥135 mg/dL (≥1.5 mmol/L).' })}</div>
+      <div class="fgrid">${sf('htn', 'Hypertension', { hint: 'Answer Yes if diagnosed, on BP-lowering treatment, <b>or BP is ≥130/80 on repeated readings</b> even without a recorded diagnosis.' })}${sf('dm', 'Diabetes')}
+        ${sf('trig', 'High triglycerides or metabolic syndrome', { full: true, opts: [['1', 'Yes'], ['0', 'No'], ['u', 'Not tested']], hint: `Triglycerides ≥${tp('chol', '135 mg/dL', '1.5 mmol/L')}, <b>or</b> metabolic syndrome = any 3 of: high waist (as above); triglycerides ≥${tp('chol', '150 mg/dL', '1.7 mmol/L')}; HDL &lt;${tp('chol', '40 mg/dL', '1.0 mmol/L')} men or &lt;${tp('chol', '50 mg/dL', '1.3 mmol/L')} women; BP ≥130/85 or treated; fasting glucose ≥${tp('glu', '100 mg/dL', '5.6 mmol/L')} or treated. <b>Optional:</b> if not tested, choose "Not tested" — the stage may rise once lipids are known.` })}</div>
       <div class="subhead">Kidney</div>
-      <div class="fgrid"><div class="field full"><label for="ckdSel">CKD risk category (KDIGO)</label>
+      <div class="fgrid"><div class="field full"><label for="ckdSel" class="flabel">CKD risk category (KDIGO)</label>
         <select id="ckdSel" data-sel="ckdcat">${[['none', 'None / no CKD'], ['moderate_high', 'Moderately increased or high risk'], ['very_high', 'Very high risk']].map(([v, t]) => `<option value="${v}" ${eff === v ? 'selected' : ''}>${t}</option>`).join('')}</select>
-        <span class="fhint">${auto ? `Pre-filled from the Kidney Health values (${{ none: 'no CKD', moderate_high: 'moderate/high risk', very_high: 'very high risk' }[auto]}). You can override.` : 'Complete Kidney Health (eGFR + uACR) to pre-fill this.'}</span></div></div>
-      <div class="subhead">Subclinical disease</div>
-      <div class="fgrid">${segField('subclin', 'Subclinical CVD documented?', YN, { hint: 'e.g. coronary calcium, raised cardiac biomarkers or echo abnormalities.' })}${segField('highrisk', 'High predicted CVD risk?', YN, { hint: 'By any validated risk score. ' + (preventResult() && preventResult().r10_CVD != null ? `PREVENT 10-year total CVD: <b>${preventResult().r10_CVD.toFixed(1)}%</b>. ` : '') + (score2Result() && score2Result().risk != null ? `${score2Result().model} 10-year: <b>${score2Result().risk.toFixed(1)}%</b> (${score2Result().band.txt.toLowerCase()}).` : (preventResult() ? '' : 'See the PREVENT and SCORE2 tabs.')) })}</div>
+        <span class="fhint">${ckdHint}</span></div></div>
+      <div class="subhead">Silent (subclinical) disease</div>
+      <div class="fgrid">${sf('subclin', 'Subclinical CVD documented?', { hint: 'e.g. coronary calcium where used locally, raised cardiac biomarkers, or LV hypertrophy or other echo abnormalities.' })}${sf('highrisk', 'High predicted CVD risk?', { hint: (pr && pr.r10_CVD != null ? `PREVENT™ 10-year total CVD: <b>${pr.r10_CVD.toFixed(1)}%</b> (≥20% is used as high risk). ` : '') + (s2 && s2.risk != null ? `${s2.model}: <b>${s2.risk.toFixed(1)}%</b> (${s2.band.txt.toLowerCase()}). ` : '') + (pr || (s2 && s2.risk != null) ? '' : 'Calculate a risk score in the first tabs.') })}</div>
       <div class="subhead">Clinical disease</div>
-      <div class="fgrid">${segField('clincvd', 'Clinical CVD (CHD, HF, stroke, PAD or AF)?', YN)}${segField('kf', 'Kidney failure?', YN)}</div>
+      <div class="fgrid">${sf('clincvd', 'Clinical CVD (coronary disease, HF, stroke, PAD or AF)?')}${sf('kf', 'Kidney failure?', { hint: 'eGFR &lt;15 or on dialysis.' })}</div>
     </div></div>
     <div class="sticky"><div class="result" id="stageResult"></div><div class="next-row"><a class="btn" href="#/m/ckm/t">T · What to do next →</a></div></div></div>`;
   },
@@ -1675,7 +1853,9 @@ MODS.ckm = {
     const sr = $('#stageResult');
     if (sr) {
       const st = ckmStage();
-      sr.innerHTML = `<h2>CKM stage</h2>` + (st ? `<div class="stage-big">${st}</div><p style="font-weight:700;margin:0 0 6px">${STAGES[st].label}</p><div class="callout">${STAGES[st].desc}</div>` : `<p class="hint">Answer all questions to see the stage.</p><span class="badge b-neutral">Awaiting answers</span>`);
+      const pre = ['adipose', 'htn', 'dm', 'highrisk', 'clincvd', 'kf'].filter(k => P[k] == null && ckmAuto(k));
+      const left = ['adipose', 'htn', 'dm', 'trig', 'subclin', 'highrisk', 'clincvd', 'kf'].filter(k => ckmEff(k) == null).length;
+      sr.innerHTML = `<h2>CKM stage</h2>` + (st ? `<div class="stage-big">${st}</div><p style="font-weight:700;margin:0 0 6px">${STAGES[st].label}</p><div class="callout"><b>What this means</b>${STAGES[st].desc}</div>${pre.length ? `<p class="hint" style="margin:8px 0 0">${pre.length} answer${pre.length > 1 ? 's were' : ' was'} pre-filled from values entered elsewhere — please check ${pre.length > 1 ? 'them' : 'it'}.</p>` : ''}${P.trig === 'u' ? '<p class="hint" style="margin:6px 0 0">Triglycerides not tested — the stage may be higher once lipids are known.</p>' : ''}` : `<p class="hint">${left} question${left > 1 ? 's' : ''} left to answer.</p><span class="badge b-neutral">Awaiting answers</span>`);
     }
     const s2 = $('#score2Result'); if (s2) this.updateScore2(s2);
     const pr = $('#preventResult'); if (!pr) return;
@@ -1709,12 +1889,13 @@ MODS.ckm = {
       confirm: `<ul>
         <li><b>Confirm each input:</b> repeat BP, lipids including triglycerides, HbA1c or fasting glucose, eGFR and uACR, BMI and waist circumference.</li>
         <li><b>Fill the common gaps:</b> uACR, lipids and prediabetes screening are the tests most often missing. Everyone with cardiovascular disease should have eGFR and uACR (ESC/ERA 2026).</li>
-        <li><b>Stage 3 assessment</b> where available: coronary artery calcium for subclinical atherosclerosis; natriuretic peptide or echocardiography for subclinical heart failure.</li>
+        <li><b>Stage 3 assessment</b> where available and used locally: natriuretic peptide or echocardiography for subclinical heart failure; coronary artery calcium scoring for subclinical atherosclerosis in some systems (for example the US). It is not routine in all countries, including the UK — follow local practice.</li>
+        <li><b>Lipoprotein(a):</b> consider measuring once in adulthood; a high level raises cardiovascular risk and supports more intensive prevention (ESC; KDIGO 2026 draft).</li>
         <li><b>Screen for social needs</b> — food insecurity, housing instability and financial strain affect CKM outcomes (2026 CKM guideline).</li>
         <li><b>Re-stage</b> at least yearly, or whenever a new diagnosis is made.</li></ul>
         <p class="src">AHA 2023 Presidential Advisory · 2026 AHA/ACC/ADA/ASN CKM Guideline</p>`,
       start: `<ul>
-        <li><b>All stages:</b> healthy diet, physical activity, sleep and no tobacco (AHA Life's Essential 8).</li>
+        <li><b>All stages:</b> healthy diet, physical activity, sleep and no tobacco (AHA Life's Essential 8).${FIVE_S}</li>
         <li><b>Stage 1:</b> weight management — lifestyle first; pharmacotherapy or metabolic and bariatric surgery where guideline criteria are met.</li>
         <li><b>Stage 2:</b> treat BP, lipids and glucose to target. GLP-1-based therapy for selected people with obesity and/or T2D and other cardiovascular risk factors; kidney-protective therapy guided by eGFR and uACR — SGLT2 inhibitors, RAS inhibitors and finerenone where indicated (see Kidney Health).</li>
         <li><b>Stage 3:</b> intensify prevention and treat subclinical disease; same organ-protective classes as indicated.</li>
@@ -1820,9 +2001,9 @@ MODS.ckm.updateScore2 = function (el) {
    TYPE 2 DIABETES
    ===================================================================== */
 const roundE = v => Math.round(v * 1e6) / 1e6;
-function a1cClass(v) { if (v == null) return null; if (S.units === 'si') { const m = roundE(UNITS.hba1c.toSI(v)); return m >= 48 ? 'dm' : m >= 39 ? 'pre' : 'norm'; } const x = roundE(v); return x >= 6.5 ? 'dm' : x >= 5.7 ? 'pre' : 'norm'; }
-function fpgClass(v) { if (v == null) return null; if (S.units === 'si') { const m = roundE(v / 18); return m >= 7.0 ? 'dm' : m >= 5.6 ? 'pre' : 'norm'; } const x = roundE(v); return x >= 126 ? 'dm' : x >= 100 ? 'pre' : 'norm'; }
-function ogttClass(v) { if (v == null) return null; if (S.units === 'si') { const m = roundE(v / 18); return m >= 11.1 ? 'dm' : m >= 7.8 ? 'pre' : 'norm'; } const x = roundE(v); return x >= 200 ? 'dm' : x >= 140 ? 'pre' : 'norm'; }
+function a1cClass(v) { if (v == null) return null; if (uSel('hba1c') === 'si') { const m = roundE(UNITS.hba1c.toSI(v)); return m >= 48 ? 'dm' : m >= 39 ? 'pre' : 'norm'; } const x = roundE(v); return x >= 6.5 ? 'dm' : x >= 5.7 ? 'pre' : 'norm'; }
+function fpgClass(v) { if (v == null) return null; if (uSel('glu') === 'si') { const m = roundE(v / 18); return m >= 7.0 ? 'dm' : m >= 5.6 ? 'pre' : 'norm'; } const x = roundE(v); return x >= 126 ? 'dm' : x >= 100 ? 'pre' : 'norm'; }
+function ogttClass(v) { if (v == null) return null; if (uSel('glu') === 'si') { const m = roundE(v / 18); return m >= 11.1 ? 'dm' : m >= 7.8 ? 'pre' : 'norm'; } const x = roundE(v); return x >= 200 ? 'dm' : x >= 140 ? 'pre' : 'norm'; }
 const CLS_TXT = { dm: ['b-veryhigh', 'Diabetes range'], pre: ['b-interm', 'Prediabetes range'], norm: ['b-low', 'Normal'] };
 function dxResult() {
   const t = [['HbA1c', 'hba1c', a1cClass(P.hba1c)], ['Fasting glucose', 'glu', fpgClass(P.fpg), 'fpg'], ['2-hour OGTT', 'glu', ogttClass(P.ogtt), 'ogtt']].filter(x => x[2]);
@@ -1855,6 +2036,14 @@ function t2dOrgans() {
   };
 }
 const ORG_BADGE = { ok: ['b-low', 'Done'], alert: ['b-high', 'Action'], missing: ['b-neutral', 'Missing'] };
+/* FIB-4 result — shown in both Type 2 Diabetes and Adiposity / Obesity (both guidelines recommend it) */
+function fibHTML() {
+  const f = fib4();
+  if (!f) return `<h2>FIB-4 (liver)</h2><p class="hint">Enter age, AST, ALT and platelets.</p><span class="badge b-neutral">Awaiting values</span>`;
+  const m = { low: ['b-low', 'Low risk of advanced fibrosis', 'good', 'Advanced fibrosis unlikely. Repeat every 1–3 years in T2D or obesity with metabolic risk; manage cardiometabolic risk.'], interm: ['b-interm', 'Indeterminate', 'warn', 'Second-line test needed — transient elastography (liver stiffness) or ELF test.'], high: ['b-veryhigh', 'High risk of advanced fibrosis', 'bad', 'Refer to hepatology for assessment.'] }[f.tier];
+  return `<h2>FIB-4 (liver)</h2><div class="big">${f.v.toFixed(2)}</div><span class="badge ${m[0]}">${m[1]}</span><div class="callout ${m[2]}"><b>Next step</b>${m[3]}</div>
+    <p class="hint" style="margin:8px 0 0">Cut-offs: &lt;${f.lowCut.toFixed(1)}${P.age >= 65 ? ' (age ≥65)' : ''} low · ${f.lowCut.toFixed(1)}–2.67 indeterminate · &gt;2.67 high.${P.age < 35 ? ' <b>Less reliable under age 35.</b>' : ''}</p>`;
+}
 
 MODS.t2d = {
   title: 'Type 2 Diabetes', sub: 'Confirm the diagnosis, check heart, kidneys and liver, and protect the organs.',
@@ -1869,7 +2058,11 @@ MODS.t2d = {
       <p>It is not only a glucose problem. T2D is a heart, kidney and liver disease: cardiovascular disease is the leading cause of death, it is a leading cause of chronic kidney disease and heart failure, and fatty liver (MASLD) with fibrosis is common.</p></div>
     <div class="card"><h2>Beyond glucose: organ protection from diagnosis</h2>
       <p>The <b>ADA/EASD 2026 consensus</b> puts organ protection first: an SGLT2 inhibitor and/or a GLP-1-based therapy (GLP-1 receptor agonist or dual GIP/GLP-1 receptor agonist) can be started <b>from diagnosis</b>, independent of baseline HbA1c and of metformin. Therapy is chosen by the organs at risk — heart, kidney, liver — and weight targets are treated as being as essential as glucose targets.</p>
-      <p>This is why every person with T2D needs a regular <b>organ check</b>: eGFR and uACR, heart failure symptoms, cardiovascular risk and a liver fibrosis score.</p></div>
+      <p>This is why every person with T2D needs a regular <b>organ check</b>: eGFR and uACR, heart failure symptoms, cardiovascular risk and a liver fibrosis score.</p>
+      <h3>Glucose still matters — early</h3>
+      <p>Good glucose control in the first years after diagnosis protects the small vessels (eyes, kidneys, nerves) for decades — the <b>"legacy effect"</b>. So organ protection and early glucose control go <b>together</b>, not one instead of the other. SGLT2 inhibitors help with both: they lower HbA1c (most when eGFR is ≥60), with a low risk of hypoglycaemia and modest weight loss, alongside their heart and kidney benefits.</p>
+      <h3>Self-management education</h3>
+      <p>Structured diabetes self-management education and support (DSMES) is a core part of care at diagnosis, every year, and when needs change (ADA/EASD 2026; KDIGO 2026 draft for diabetes with CKD).</p></div>
     <div class="card"><h2>Why it gets missed</h2>
       <p>T2D is often silent for years before diagnosis, so screening — not symptoms — finds most cases. After diagnosis, organ damage is missed too: uACR is under-tested, heart failure symptoms are put down to age or weight, and liver fibrosis is rarely scored.</p>
       <p class="hint">In people of Asian ancestry, T2D tends to develop at a younger age and at lower body weight — screening at BMI ≥23 kg/m² is recommended.</p></div>
@@ -1921,7 +2114,7 @@ MODS.t2d = {
         dx.innerHTML = `<h2>Diagnosis</h2>${r.tests.map(([n, u, c, key]) => `<div class="rline"><span>${n}</span><span>${showLab(u, P[key || 'hba1c'])} <span class="badge ${CLS_TXT[c][0]}" style="font-size:11.5px;padding:2px 8px">${CLS_TXT[c][1]}</span></span></div>`).join('')}
           <div class="callout ${r.st.cls}"><b>${r.st.t}</b>${r.st.b}</div>
           ${(r.st.k === 'confirmed' || r.st.k === 'likely') && P.dm !== '1' ? `<button type="button" class="btn sm" data-recdm>Record diabetes for this patient</button><p class="hint" style="margin:6px 0 0">Sets "Diabetes = Yes" across SPOT (CKM stage, PREVENT, SCORE2-Diabetes).</p>` : ''}
-          ${P.dm === '1' ? '<p class="hint" style="margin:8px 0 0">Diabetes is recorded for this patient across SPOT.</p>' : ''}
+          ${P.dm === '1' ? '<p class="hint" style="margin:8px 0 0">Diabetes is already recorded for this patient, so confirming the diagnosis is not needed — go to the Organ check.</p>' : ''}
           <p class="hint" style="margin:10px 0 0">Thresholds — diabetes: HbA1c ≥6.5% (48 mmol/mol), fasting ≥126 mg/dL (7.0 mmol/L), 2-h OGTT ≥200 mg/dL (11.1 mmol/L). Prediabetes (ADA): HbA1c 5.7–6.4% (39–47 mmol/mol), fasting 100–125 mg/dL (5.6–6.9 mmol/L), 2-h 140–199 mg/dL (7.8–11.0 mmol/L). WHO uses fasting 110–125 mg/dL (6.1–6.9 mmol/L) for impaired fasting glucose.</p>`;
       }
     }
@@ -1935,21 +2128,12 @@ MODS.t2d = {
         ${o.liver.s === 'missing' ? '<p class="hint" style="margin:8px 0 0">Calculate FIB-4 in the FIB-4 tab.</p>' : ''}
         <div class="callout neutral"><b>Also due every year</b>Retinal examination and a foot examination (sensation, pulses, skin).</div>`;
     }
-    const fb = $('#fibResult');
-    if (fb) {
-      const f = fib4();
-      if (!f) fb.innerHTML = `<h2>FIB-4</h2><p class="hint">Enter age, AST, ALT and platelets.</p><span class="badge b-neutral">Awaiting values</span>`;
-      else {
-        const m = { low: ['b-low', 'Low risk of advanced fibrosis', 'good', 'Advanced fibrosis unlikely. Repeat every 1–3 years in T2D; manage cardiometabolic risk.'], interm: ['b-interm', 'Indeterminate', 'warn', 'Second-line test needed — transient elastography (liver stiffness) or ELF test.'], high: ['b-veryhigh', 'High risk of advanced fibrosis', 'bad', 'Refer to hepatology for assessment.'] }[f.tier];
-        fb.innerHTML = `<h2>FIB-4</h2><div class="big">${f.v.toFixed(2)}</div><span class="badge ${m[0]}">${m[1]}</span><div class="callout ${m[2]}"><b>Next step</b>${m[3]}</div>
-          <p class="hint" style="margin:8px 0 0">Cut-offs: &lt;${f.lowCut.toFixed(1)}${P.age >= 65 ? ' (age ≥65)' : ''} low · ${f.lowCut.toFixed(1)}–2.67 indeterminate · &gt;2.67 high.${P.age < 35 ? ' <b>Less reliable under age 35.</b>' : ''}</p>`;
-      }
-    }
+    const fb = $('#fibResult'); if (fb) fb.innerHTML = fibHTML();
   },
   tailor() {
     const dx = dxResult(), o = t2dOrgans(), f = fib4();
     const parts = [];
-    if (dx) parts.push(`<b>${dx.st.t}</b>`); else if (P.dm === '1') parts.push('<b>Diabetes recorded</b>');
+    if (P.dm === '1') parts.push('<b>Diabetes recorded</b>'); else if (dx) parts.push(`<b>${dx.st.t}</b>`);
     const organs = [];
     if (P.ascvd === '1') organs.push('ASCVD'); if (P.hfdx === '1') organs.push('heart failure'); if (o.ckd) organs.push('CKD');
     if (organs.length) parts.push('organ involvement: <b>' + organs.join(', ') + '</b>');
@@ -1957,39 +2141,46 @@ MODS.t2d = {
     const gaps = ['kidney', 'liver', 'bp', 'lipids'].filter(k => o[k].s === 'missing');
     if (!parts.length && gaps.length === 4) return null;
     let focus = [];
-    if (dx && dx.st.k === 'repeat') focus.push('repeat a test to confirm the diagnosis');
-    if (dx && dx.st.k === 'pre') focus.push('prediabetes prevention and yearly testing');
-    if (P.hfdx === '1') focus.push('SGLT2 inhibitor plus MRA for heart failure (ESC 2026)');
-    if (o.ckd) focus.push('kidney protection — SGLT2 inhibitor as foundation, RAS inhibitor, finerenone if uACR >3 mg/mmol, GLP-1-based therapy');
-    if (P.ascvd === '1') focus.push('GLP-1-based therapy and/or SGLT2 inhibitor with proven CV benefit, started early');
-    if (dx && (dx.st.k === 'confirmed' || dx.st.k === 'likely') && P.hfdx !== '1' && !o.ckd && P.ascvd !== '1') focus.push('consider SGLT2 inhibitor and/or GLP-1-based therapy from diagnosis, plus a weight-loss target');
+    const dmKnown = P.dm === '1';
+    if (!dmKnown && dx && dx.st.k === 'repeat') focus.push('repeat a test to confirm the diagnosis');
+    if (!dmKnown && dx && dx.st.k === 'pre') focus.push('prediabetes prevention and yearly testing');
+    const not = k => onMed(k) ? '' : ' (not yet recorded)';
+    if (P.hfdx === '1') focus.push(`heart failure — SGLT2 inhibitor${not('sglt2')} plus MRA${not('mra')} (ESC 2026)`);
+    if (o.ckd) focus.push(`kidney protection — SGLT2 inhibitor${not('sglt2')}, ACE inhibitor or ARB${not('rasi')}, finerenone if uACR ≥${tp('uacr', '30 mg/g', '3 mg/mmol')} and potassium normal${not('mra')}, GLP-1-based therapy${not('glp1')}`);
+    if (P.ascvd === '1') focus.push(`ASCVD — GLP-1-based therapy${not('glp1')} and/or SGLT2 inhibitor${not('sglt2')} with proven CV benefit, started early`);
+    if ((dmKnown || (dx && (dx.st.k === 'confirmed' || dx.st.k === 'likely'))) && P.hfdx !== '1' && !o.ckd && P.ascvd !== '1') focus.push('organ protection from diagnosis — consider SGLT2 inhibitor and/or GLP-1-based therapy, plus a weight-loss target and early glucose control');
     if (f && f.tier !== 'low') focus.push(f.tier === 'high' ? 'hepatology referral for FIB-4 >2.67' : 'elastography for indeterminate FIB-4');
     if (gaps.length) focus.push('close care gaps: ' + gaps.map(g => ({ kidney: 'eGFR/uACR', liver: 'FIB-4', bp: 'BP', lipids: 'lipids' }[g])).join(', '));
     return `<p>${parts.length ? parts.join(' · ') + '.' : 'No results entered yet.'}</p>${focus.length ? `<p><b>Suggested focus:</b> ${focus.join('; ')}.</p>` : ''}`;
   },
   t() {
+    const dmKnown = P.dm === '1';
     return actionView('t2d', this.tailor(), {
+      confirmTitle: dmKnown ? 'Check' : 'Confirm',
       confirm: `<ul>
-        <li><b>Confirm the diagnosis:</b> two results in the diabetes range (same or different tests), unless hyperglycaemia is unequivocal with classic symptoms.</li>
+        ${dmKnown ? '<li class="hint" style="list-style:none;margin-left:-18px">Diabetes is already recorded for this patient, so diagnostic steps are skipped.</li>' : `<li><b>Confirm the diagnosis:</b> two results in the diabetes range (same or different tests), unless hyperglycaemia is unequivocal with classic symptoms.</li>`}
         <li><b>Check the type:</b> young age, low BMI, rapid weight loss or ketones suggest type 1 or LADA — consider autoantibodies.</li>
         <li><b>Baseline organ check:</b> eGFR and uACR, lipids, BP, liver enzymes with FIB-4, retinal and foot examination; ECG if indicated.</li>
         <li><b>Cardiovascular risk:</b> SCORE2-Diabetes or PREVENT (CKM & CV Risk module).</li></ul>
         <p class="src">ADA Standards of Care 2026 · ADA/EASD 2026 · ESC 2023 Diabetes · EASL–EASD–EASO 2024</p>`,
-      start: `<ul>
-        <li><b>24-hour behaviours ("five S's"):</b> standing (break up sitting), stepping (6,000–10,000 steps/day), sweating (≥150 min/week moderate-to-vigorous activity), strengthening (resistance training 2–3×/week, plus adequate protein — important on GLP-1-based therapy), sleep (7–8 hours).</li>
+      start: `<p style="font-size:13.5px;margin:0 0 4px"><b>1 · Protect the organs first</b> — SGLT2 inhibitor and/or GLP-1-based therapy from diagnosis, independent of HbA1c and of metformin:</p><ul>
+          <li><b>ASCVD</b> — GLP-1-based therapy with proven CV benefit and/or SGLT2 inhibitor; start combinations early.</li>
+          <li><b>Heart failure</b> — SGLT2 inhibitor as foundation, plus MRA (ESC 2026); semaglutide or tirzepatide in obesity-related HFpEF.</li>
+          <li><b>CKD</b> (KDIGO 2026 draft; same wording as Kidney Health):<ul><li>${SGLT2_CKD_TXT()}</li><li>${RASI_TXT()}</li><li>${FINER_TXT()}</li><li>${GLP1_CKD_TXT()}</li></ul></li>
+          <li><b>Fatty liver (MASLD)</b> — semaglutide, tirzepatide or pioglitazone.</li>
+          <li><b>Peripheral artery disease</b> — semaglutide improves walking capacity.</li></ul>
+        <p style="font-size:13.5px;margin:10px 0 4px"><b>2 · Control glucose early, with weight as a target</b></p><ul>
+        <li><b>Early glucose control</b> protects eyes, kidneys and nerves for years (legacy effect). Target HbA1c &lt;${tp('hba1c', '7%', '53 mmol/mol')} for many adults; individualise for age, frailty and hypoglycaemia risk.</li>
+        <li><b>SGLT2 inhibitors</b> also lower HbA1c — most when eGFR is ≥60 — with low hypoglycaemia risk and modest weight loss: a triple heart, kidney and metabolic benefit.</li>
         <li><b>Weight is a primary target:</b> early loss of 10–15% or more improves the chance of remission; prefer weight-lowering therapies; consider metabolic surgery where criteria are met.</li>
-        <li><b>Glycaemic target:</b> HbA1c &lt;7% (53 mmol/mol) for many adults; individualise for age, frailty and hypoglycaemia risk.</li>
-        <li><b>Organ protection from diagnosis</b> — SGLT2 inhibitor and/or GLP-1-based therapy, independent of HbA1c and of metformin:<ul>
-          <li>ASCVD — GLP-1-based therapy with proven CV benefit and/or SGLT2 inhibitor; start combinations early</li>
-          <li>Heart failure — SGLT2 inhibitor as foundation, plus MRA (ESC 2026); semaglutide or tirzepatide in obesity-related HFpEF</li>
-          <li>CKD — SGLT2 inhibitor as foundation; add finerenone when uACR &gt;3 mg/mmol (&gt;30 mg/g) on a RAS inhibitor; GLP-1-based therapy for kidney and weight benefit</li>
-          <li>Fatty liver (MASLD) — semaglutide, tirzepatide or pioglitazone</li>
-          <li>Peripheral artery disease — semaglutide improves walking capacity</li></ul></li>
-        <li><b>Early combination therapy</b> with CVD, CKD or HF, and in early-onset T2D (under age 40). Metformin remains an option but is no longer a required first step.</li>
-        <li><b>Insulin</b> usually follows GLP-1-based therapy; once-weekly basal insulins and fixed-ratio combinations reduce injections; consider CGM, especially with insulin. Deprescribe sulfonylureas in frail people.</li>
-        <li><b>BP</b> &lt;130/80 mmHg (RAS inhibitor with albuminuria); <b>statin</b> for most adults aged 40–75, high intensity with ASCVD or higher risk.</li>
+        <li><b>Early combination therapy</b> with CVD, CKD or HF, and in early-onset T2D (under age 40). Metformin remains an option but is no longer a required first step; with CKD, ${METF_CKD_TXT.replace('<b>Metformin</b>', 'use metformin')}</li>
+        <li>Deprescribe sulfonylureas in frail people.</li></ul>
+        <p style="font-size:13.5px;margin:10px 0 4px"><b>3 · Lifestyle, education and risk factors</b></p>
+        ${FIVE_S}<ul>
+        <li><b>Self-management education and support (DSMES)</b> at diagnosis, yearly and when needs change.</li>
+        <li><b>BP</b> &lt;130/80 mmHg (ACE inhibitor or ARB with albuminuria); <b>statin</b> for most adults aged 40–75, high intensity with ASCVD or higher risk.</li>
         <li><b>Monitor:</b> HbA1c every 3–6 months; yearly eGFR and uACR, lipids, retinal and foot examination; repeat FIB-4 every 1–3 years.</li></ul>
-        <p class="src">ADA/EASD 2026 · ADA Standards of Care 2026 · ESC 2026 HF · KDIGO 2022</p>`,
+        <p class="src">ADA/EASD 2026 · ADA Standards of Care 2026 · ESC 2026 HF · KDIGO 2026 Diabetes in CKD (draft)</p>`,
       refer: `<ul>
         <li><b>Urgent:</b> severe hyperglycaemia with symptoms, dehydration or ketones; acute foot ulcer with infection or ischaemia.</li>
         <li><b>Diabetes specialist:</b> suspected type 1 or other type, pregnancy or planning pregnancy, targets not met despite combination therapy, or recurrent hypoglycaemia.</li>
@@ -2025,7 +2216,7 @@ function obResult() {
   return { b, cls: bmiClass(b), wHigh, whtr, anthro, excess, stage1, conds, c };
 }
 MODS.ob = {
-  title: 'Obesity', sub: 'Measure excess adiposity and spot clinical obesity.',
+  title: 'Adiposity / Obesity', sub: 'Measure excess adiposity, spot clinical obesity and check the liver.',
   checks: {
     rel: ['Type 2 diabetes or prediabetes', 'Hypertension', 'High triglycerides or low HDL', 'Fatty liver (MASLD)', 'Obstructive sleep apnoea (snoring, daytime sleepiness)', 'Knee or hip osteoarthritis, joint pain', 'Breathlessness on exertion or heart failure', 'Chronic kidney disease', 'Polycystic ovary syndrome or infertility', 'Gastro-oesophageal reflux', 'Low mood or depression', 'Limits in daily activities or mobility']
   },
@@ -2058,10 +2249,13 @@ MODS.ob = {
       <div class="subhead">Measurements</div>
       <div class="fgrid">${numField('ht')}${numField('wt')}${numField('waist')}${segField('sex', 'Sex', [['f', 'Female'], ['m', 'Male']])}
         <div class="field"><span class="flabel">BMI</span><div class="calc" id="obBmi">—</div></div><div class="field"><span class="flabel">Waist-to-height ratio</span><div class="calc" id="obWhtr">—</div></div></div>
-      <p class="hint" style="margin-top:12px">Measure waist midway between the lowest rib and the top of the hip bone, at the end of a normal breath.</p></div></div>
-      <div class="sticky"><div class="result" id="obResult"></div><div class="next-row"><a class="btn" href="#/m/ob/t">T · What to do next →</a></div></div></div>`;
+      <p class="hint" style="margin-top:12px">Measure waist midway between the lowest rib and the top of the hip bone, at the end of a normal breath.</p></div>
+      <div class="card"><h2>Liver: FIB-4</h2><p class="hint">Fatty liver (MASLD) is common with excess adiposity. FIB-4 is recommended with obesity plus a metabolic risk factor, and in T2D or prediabetes (EASL–EASD–EASO 2024).</p>
+        <div class="fgrid">${numField('age')}${numField('plt')}${numField('ast')}${numField('alt')}</div></div></div>
+      <div class="sticky"><div class="result" id="obResult"></div><div class="result" id="fibResult"></div><div class="next-row"><a class="btn" href="#/m/ob/t">T · What to do next →</a></div></div></div>`;
   },
   update() {
+    const fbo = $('#fibResult'); if (fbo) fbo.innerHTML = fibHTML();
     const r = obResult(), el = $('#obResult'); if (!el) return;
     const b = calcBMI();
     if ($('#obBmi')) $('#obBmi').textContent = b ? b.toFixed(1) + ' kg/m²' : '—';
@@ -2071,7 +2265,7 @@ MODS.ob = {
     el.innerHTML = `<h2>Result · ${c.label} cut-offs</h2>
       ${r.b != null ? `<div class="big">${r.b.toFixed(1)}<span style="font-size:16px;color:var(--muted)"> kg/m²</span></div><span class="badge b-${r.cls.cls}">${r.cls.t}</span>` : '<p class="hint">Add height and weight for BMI.</p>'}
       <div style="margin-top:12px">
-      <div class="rline"><span>Waist</span><span>${P.waist != null ? P.waist + ' cm' + (r.wHigh == null ? ' (select sex)' : r.wHigh ? ' — above threshold' : ' — below threshold') : 'not entered'}</span></div>
+      <div class="rline"><span>Waist</span><span>${P.waist != null ? showLab('len', P.waist) + (r.wHigh == null ? ' (select sex)' : r.wHigh ? ' — above threshold' : ' — below threshold') : 'not entered'}</span></div>
       <div class="rline"><span>Waist-to-height</span><span>${r.whtr != null ? r.whtr.toFixed(2) + (r.whtr >= 0.5 ? ' — ≥0.5, raised' : ' — below 0.5') : '—'}</span></div></div>
       ${r.excess ? `<div class="callout bad"><b>Excess adiposity confirmed</b>BMI ≥${c.ob}${r.b >= 40 ? '' : ' plus a raised waist or waist-to-height ratio'}. ${r.conds ? `<b>${r.conds} related condition${r.conds > 1 ? 's' : ''}</b> ticked in Pick up — assess whether excess adiposity is driving organ dysfunction or limiting daily life (<b>clinical obesity</b>).` : 'Check for organ dysfunction or functional limitation to distinguish clinical from preclinical obesity (see Pick up).'}</div>`
         : (r.b != null && r.b >= c.ob && !r.anthro) ? `<div class="callout warn"><b>BMI in obesity range — confirm</b>Measure waist (or waist-to-height ratio) to confirm excess adiposity; BMI alone can misclassify muscular or older people.</div>` : ''}
@@ -2087,6 +2281,8 @@ MODS.ob = {
     else if (r.excess) focus = 'Excess adiposity confirmed — check for related conditions and organ function; start structured weight management.';
     else if (r.stage1) focus = 'Increased adiposity (CKM Stage 1) — lifestyle support, screen for metabolic risk factors, re-measure yearly.';
     else focus = 'No excess adiposity on these measures — re-measure yearly.';
+    const f = fib4(); if (f) { parts.push(`FIB-4 <b>${f.v.toFixed(2)}</b>`); if (f.tier !== 'low') focus += f.tier === 'high' ? ' FIB-4 >2.67 — refer to hepatology.' : ' FIB-4 indeterminate — arrange elastography.'; }
+    else if (r.excess) focus += ' Calculate FIB-4 for fatty liver fibrosis.';
     return `<p>${parts.join(' · ')}.</p><p><b>Suggested focus:</b> ${focus}</p>`;
   },
   t() {
@@ -2098,7 +2294,7 @@ MODS.ob = {
         <p class="src">Lancet Commission on clinical obesity 2025 · ADA Standards of Care</p>`,
       start: `<ul>
         <li><b>Person-centred conversation:</b> ask permission, avoid stigma, agree goals.</li>
-        <li><b>Lifestyle and behavioural support:</b> reduced-energy eating pattern, ≥150 minutes/week of activity plus resistance training, sleep. Weight loss of ≥5% improves glucose, BP and lipids; 10–15% or more benefits fatty liver, sleep apnoea and remission of T2D.</li>
+        <li><b>Lifestyle and behavioural support:</b> reduced-energy eating pattern, ≥150 minutes/week of activity plus resistance training, sleep. Weight loss of ≥5% improves glucose, BP and lipids; 10–15% or more benefits fatty liver, sleep apnoea and remission of T2D.${FIVE_S}</li>
         <li><b>Pharmacotherapy</b> where guideline criteria are met (commonly BMI ≥30, or ≥27 with an obesity-related condition; lower thresholds apply in Asian populations): GLP-1 receptor agonists and dual GIP/GLP-1 receptor agonists are the most effective classes; other agents where available.</li>
         <li><b>Choose weight-friendly treatments</b> for related conditions — e.g. in T2D, glucose-lowering classes that also reduce weight.</li>
         <li><b>Heart failure with obesity:</b> semaglutide or tirzepatide for symptomatic HF with LVEF ≥45% and BMI ≥30 kg/m², with or without diabetes (ESC 2026, Class IIa).</li>
@@ -2134,7 +2330,7 @@ function updatePrompt(mod) {
 function actionView(mod, tailor, b) {
   return `${tailor ? `<div class="tailor"><span class="lab">Based on your result</span>${tailor}</div>` : `<div class="callout neutral"><b>Not yet tailored</b>Enter values in <a href="#/m/${mod}/o">O · Order & score</a> to see guidance for this patient. The general guidance below applies meanwhile.</div>`}
   <div class="act">
-    <div class="card"><div class="act-h"><span class="num">1</span><h2>Confirm</h2></div>${b.confirm}</div>
+    <div class="card"><div class="act-h"><span class="num">1</span><h2>${b.confirmTitle || 'Confirm'}</h2></div>${b.confirm}</div>
     <div class="card"><div class="act-h"><span class="num">2</span><h2>Start & monitor</h2></div>${b.start}</div>
     <div class="card"><div class="act-h"><span class="num">3</span><h2>Refer when</h2></div>${b.refer}</div>
   </div>
@@ -2168,9 +2364,9 @@ function landing() {
     <div class="cards">
       ${card('hf', 'Is breathlessness or fatigue heart failure — especially HFpEF?', 'HFpEF-ABA score · natriuretic peptide or ECG pathway')}
       ${card('kidney', 'Blood pressure, eGFR and urine albumin: the kidney health check.', 'CKD-EPI 2021 eGFR · KDIGO risk grid · BP status')}
-      ${card('ckm', 'Stage CKM syndrome and estimate 10- and 30-year risk.', 'CKM staging · PREVENT™ equations')}
+      ${card('ckm', 'Estimate 10- and 30-year cardiovascular risk and stage CKM syndrome.', 'SCORE2 family · PREVENT™ equations · CKM staging')}
       ${card('t2d', 'Confirm the diagnosis, check heart, kidneys and liver, and protect the organs.', 'Diagnostic thresholds · organ check · FIB-4')}
-      ${card('ob', 'Measure excess adiposity and spot clinical obesity.', 'BMI with WHO or Asian cut-offs · waist · waist-to-height')}
+      ${card('ob', 'Measure excess adiposity and spot clinical obesity.', 'BMI with WHO or Asian cut-offs · waist · waist-to-height · FIB-4')}
     </div>
   </div></section>
 
@@ -2203,14 +2399,14 @@ function landing() {
 
   <section class="block" style="border-bottom:0"><div class="wrap">
     <div class="privacy"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F4E89" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-      <div><b>No patient data leaves this device.</b> Values you enter are shared across the modules so you type them once, but nothing is stored or sent, and everything clears when you close the page. Use the <b>SI / Conventional</b> switch at the top to match your laboratory's units.</div></div>
+      <div><b>No patient data leaves this device.</b> Values you enter are shared across the modules so you type them once, but nothing is stored or sent, and everything clears when you close the page. Use the <b>Units</b> button at the top to choose your country, or tap the unit next to any field (for example <b>mg/dL ⇄</b>) to switch just that measure.</div></div>
   </div></section>`;
 }
 
 /* ---------- module page ---------- */
 function patientBar() {
   const keys = Object.keys(SHARED_LABELS).filter(k => P[k] != null);
-  return `<div class="pbar" id="pbar">${keys.length ? `<span>Patient values (shared across modules):</span><span class="chips">${keys.map(k => `<span class="chip">${SHARED_LABELS[k]}</span>`).join('')}</span><button type="button" class="linkbtn" data-clear>Clear patient</button>` : '<span>Values you enter here are shared across all modules.</span>'}</div>`;
+  return `<div class="pbar no-print" id="pbar">${keys.length ? `<span>Patient values (shared across modules):</span><span class="pcount">${keys.length} entered</span><span class="chips">${keys.map(k => `<span class="chip">${SHARED_LABELS[k]}</span>`).join('')}</span><button type="button" class="linkbtn${S.clearArm ? ' arm' : ''}" data-clear>${S.clearArm ? 'Tap again to clear all values' : 'Clear patient'}</button>` : '<span>Values you enter here are shared across all modules.</span>'}</div>`;
 }
 function moduleView(id, step) {
   const M = MODS[id];
@@ -2232,25 +2428,45 @@ function spotView() {
       <div class="mod-title"><div class="ic spot-ic">${SPOT_MARK}</div><div><h1>Spot my patient</h1><p>Enter what you have once — SPOT checks heart, kidney, metabolism and weight together, and shows what is missing.</p></div></div>
     </div></div>
     <main class="mod"><div class="wrap">${patientBar()}<div style="height:14px"></div>
-    <div class="cols spot-cols">
-      <div class="no-print">
+    <div class="spot-switch no-print" role="tablist" aria-label="Spot my patient view">
+      <button type="button" role="tab" data-spottab="enter" class="${S.spotTab === 'enter' ? 'on' : ''}" aria-selected="${S.spotTab === 'enter'}">1 · Enter values</button>
+      <button type="button" role="tab" data-spottab="results" class="${S.spotTab === 'results' ? 'on' : ''}" aria-selected="${S.spotTab === 'results'}">2 · Results<span class="cnt" id="swCnt" hidden></span></button>
+    </div>
+    <div class="cols spot-cols" data-sv="${S.spotTab}">
+      <div class="no-print spot-entry">
         <div class="card"><h2>Patient</h2>
           <div class="fgrid">${numField('age')}${segField('sex', 'Sex', [['f', 'Female'], ['m', 'Male']])}${numField('ht')}${numField('wt')}${numField('waist')}
           <div class="field"><span class="flabel">BMI</span><div class="calc" id="spBmi">—</div></div></div>
-          <div class="subhead">BMI cut-offs</div>
-          <div class="seg" role="group" aria-label="BMI cut-offs">${[['who', 'WHO (general)'], ['asian', 'Asian populations']].map(([v, t]) => `<button type="button" data-bmicut="${v}" class="${S.bmiCut === v ? 'on' : ''}" aria-pressed="${S.bmiCut === v}">${t}</button>`).join('')}</div></div>
+          <p class="fhint" style="margin:10px 0 0">BMI cut-offs: <b>${S.bmiCut === 'asian' ? 'Asian populations' : 'WHO (general)'}</b> · <button type="button" class="linkbtn" data-openunits>change</button></p></div>
         <div class="card"><h2>History</h2>
-          <div class="fgrid">${segField('dm', 'Diabetes', YN)}${segField('htn', 'Hypertension', YN)}${segField('smoking', 'Current smoker', YN)}${segField('af', 'Atrial fibrillation', YN)}${segField('ascvd', 'Established ASCVD', YN, { hint: 'Coronary disease, stroke/TIA, PAD.' })}${segField('hfdx', 'Heart failure diagnosed', YN)}${segField('bptreat', 'On BP-lowering treatment', YN)}${segField('statin', 'On statin', YN)}
-          ${P.dm === '1' ? numField('dxage', { full: true }) : ''}</div></div>
+          <div class="fgrid">${segField('dm', 'Diabetes', YN)}${segField('htn', 'Hypertension', YN, { hint: 'Yes if diagnosed, on treatment, or BP repeatedly ≥130/80.' })}${segField('smoking', 'Current smoker', YN)}${segField('af', 'Atrial fibrillation', YN)}${segField('ascvd', 'Established ASCVD', YN, { hint: 'Coronary disease, stroke/TIA, PAD.' })}${segField('hfdx', 'Heart failure diagnosed', YN)}
+          ${P.dm === '1' ? numField('dxage', { full: true }) : ''}</div>
+          <div class="subhead">Current medicines</div>
+          <div class="fgrid">${segField('bptreat', 'BP-lowering treatment', YN)}${segField('statin', 'Statin', YN)}${MEDS.map(([k, l]) => segField(k, l, YN)).join('')}</div></div>
         <div class="card"><h2>Measurements & labs</h2>
           <div class="fgrid">${numField('sbp')}${numField('dbp')}${numField('creat')}
           <div class="field"><span class="flabel">eGFR (CKD-EPI 2021)</span><div class="calc" id="spEgfr">—</div></div>
           ${numField('uacr', { full: true })}${numField('tc')}${numField('hdl')}${numField('hba1c')}${numField('fpg')}</div>
           <div class="subhead">Optional</div>
-          <div class="fgrid">${numField('ntprobnp', { full: true })}${numField('ast')}${numField('alt')}${numField('plt', { full: true })}</div></div>
+          <div class="fgrid">${numField('ntprobnp', { full: true })}${numField('ast')}${numField('alt')}${numField('plt')}
+          <div class="field"><span class="flabel">FIB-4 (liver)</span><div class="calc" id="spFib">—</div></div></div>
+          ${lowLabNote()}</div>
+        <div class="spot-pad"></div>
       </div>
       <div class="sticky" id="spotSnap"></div>
-    </div></div></main>`;
+    </div>
+    <button type="button" class="spot-fab no-print" data-spottab="results" id="spotFab">See results →</button>
+    </div></main>`;
+}
+/* What still works without laboratory tests (feedback: limited lab access) */
+function lowLabNote() {
+  return `<div class="lowlab"><b>No lab access, or waiting for results?</b>SPOT still gives useful results from a clinic visit:
+    <ul><li><b>Heart failure:</b> HFpEF-ABA needs only age, height, weight and AF. Use an ECG if natriuretic peptides are not available.</li>
+    <li><b>Adiposity:</b> BMI, waist and waist-to-height ratio.</li>
+    <li><b>Blood pressure</b> status, and a minimum CKM stage from history and BP.</li>
+    <li><b>Kidney:</b> a point-of-care urine albumin-creatinine strip is acceptable when lab uACR is not available (KDIGO 2026 draft).</li>
+    <li><b>Diabetes:</b> point-of-care HbA1c or fasting capillary glucose to screen; confirm with a lab test when possible.</li></ul>
+    Results that need a missing test are listed under <b>Care gaps</b>.</div>`;
 }
 
 /* Individual tile results */
@@ -2263,6 +2479,7 @@ function spotTiles() {
   if (P.hfdx === '1') { hf.cls = 'high'; hf.badge = 'Diagnosed'; hf.lines.push('Heart failure diagnosed — see Take action by type.'); }
   if (aba != null) { const t = abaTier(aba); hf.lines.push(`HFpEF-ABA <b>${aba.toFixed(1)}%</b> — ${{ low: 'low', interm: 'intermediate', high: 'high' }[t]} probability`); if (P.hfdx !== '1') { hf.cls = t === 'low' ? 'low' : t === 'interm' ? 'moderate' : 'veryhigh'; hf.badge = { low: 'Low', interm: 'Intermediate', high: 'High' }[t]; } }
   if (nt) { hf.lines.push(`NT-proBNP <b>${P.ntprobnp}</b> pg/mL — ${nt === 'low' ? 'below 125, HF unlikely' : 'at or above 125, refer for echo'}`); if (nt === 'high' && P.hfdx !== '1') { hf.cls = 'veryhigh'; hf.badge = 'Refer for echo'; } }
+  if (aba != null && abaTier(aba) === 'low' && !nt && P.hfdx !== '1') hf.lines.push('A low score does not rule out HF — if breathless or fatigued, check NT-proBNP or ECG.');
   if (!hf.lines.length) hf.lines.push('Needs age, height, weight and AF status.');
   tiles.push(hf);
   // Kidney
@@ -2278,24 +2495,30 @@ function spotTiles() {
   const st = ckmStage();
   if (st) { cv.lines.push(`CKM <b>Stage ${st}</b>`); cv.badge = 'Stage ' + st; cv.cls = { '0': 'low', '1': 'moderate', '2': 'moderate', '3': 'high', '4a': 'veryhigh', '4b': 'veryhigh' }[st]; }
   else { const est = estStage(); if (est) { cv.lines.push(`Likely <b>CKM Stage ${est}</b> or higher from entered data — confirm in the module`); cv.badge = '≥ Stage ' + est; cv.cls = { '1': 'moderate', '2': 'moderate', '3': 'high', '4': 'veryhigh' }[est]; } }
-  if (pr && pr.r10_CVD != null) cv.lines.push(`PREVENT™ 10-yr total CVD <b>${pr.r10_CVD.toFixed(1)}%</b>${pr.r10_HF != null ? `, HF <b>${pr.r10_HF.toFixed(1)}%</b>` : ''}`);
-  if (s2 && s2.risk != null) { cv.lines.push(`${s2.model} 10-yr <b>${s2.risk.toFixed(1)}%</b> — ${s2.band.txt.toLowerCase()} (${REGION_NAME[S.region].toLowerCase()}-risk region)`); if (!st && cv.cls === 'neutral') { cv.cls = s2.band.cls; cv.badge = s2.band.txt; } }
+  const prLine = (pr && pr.r10_CVD != null) ? `PREVENT™ 10-yr total CVD <b>${pr.r10_CVD.toFixed(1)}%</b>${pr.r10_HF != null ? `, HF <b>${pr.r10_HF.toFixed(1)}%</b>` : ''}${pr.r30_CVD != null ? ` · 30-yr total CVD <b>${pr.r30_CVD.toFixed(1)}%</b>` : ''}` : null;
+  const s2Line = (s2 && s2.risk != null) ? `${s2.model} 10-yr <b>${s2.risk.toFixed(1)}%</b> — ${s2.band.txt.toLowerCase()} (${REGION_NAME[S.region].toLowerCase()}-risk region)` : null;
+  (S.score === 'score2' ? [s2Line, prLine] : [prLine, s2Line]).forEach(l => { if (l) cv.lines.push(l); });
+  if (s2 && s2.risk != null && !st && cv.cls === 'neutral') { cv.cls = s2.band.cls; cv.badge = s2.band.txt; }
   if (!cv.lines.length) cv.lines.push('Needs lipids, BP, smoking and diabetes status for risk scores.');
   tiles.push(cv);
   // T2D
   let t2 = { mod: 't2d', name: 'Type 2 diabetes', lines: [], cls: 'neutral', badge: 'Not assessed' };
-  if (P.dm === '1') { t2.badge = 'Diabetes'; t2.cls = 'high'; const a = P.hba1c; if (a != null) t2.lines.push(`HbA1c <b>${showLab('hba1c', a)}</b>${a >= 7 ? ' — above the common &lt;7% target' : ' — at or below 7%'}`); else t2.lines.push('Diabetes recorded — HbA1c not entered'); }
+  if (P.dm === '1') { t2.badge = 'Diabetes'; t2.cls = 'high'; const a = P.hba1c; if (a != null) t2.lines.push(`HbA1c <b>${showLab('hba1c', a)}</b>${a >= 7 ? ` — above the common &lt;${tp('hba1c', '7%', '53 mmol/mol')} target` : ` — at or below ${tp('hba1c', '7%', '53 mmol/mol')}`}`); else t2.lines.push('Diabetes recorded — HbA1c not entered'); }
   else if (dx) { t2.lines.push(`<b>${dx.st.t}</b>`); t2.badge = { confirmed: 'Diabetes range', likely: 'Diabetes likely', repeat: 'Repeat test', pre: 'Prediabetes', normal: 'Normal' }[dx.st.k]; t2.cls = { confirmed: 'veryhigh', likely: 'veryhigh', repeat: 'high', pre: 'moderate', normal: 'low' }[dx.st.k]; }
   else t2.lines.push('Needs HbA1c or fasting glucose.');
-  if (f) t2.lines.push(`FIB-4 <b>${f.v.toFixed(2)}</b> — ${{ low: 'low fibrosis risk', interm: 'indeterminate', high: 'high fibrosis risk' }[f.tier]}`);
+  const fibLine = f ? `FIB-4 <b>${f.v.toFixed(2)}</b> — ${{ low: 'low liver fibrosis risk', interm: 'indeterminate, arrange elastography', high: 'high fibrosis risk, refer to hepatology' }[f.tier]}` : null;
+  if (fibLine) t2.lines.push(fibLine);
   tiles.push(t2);
-  // Obesity
-  let o = { mod: 'ob', name: 'Weight & adiposity', lines: [], cls: 'neutral', badge: 'Not assessed' };
+  // Adiposity / obesity
+  let o = { mod: 'ob', name: 'Adiposity / obesity', lines: [], cls: 'neutral', badge: 'Not assessed' };
   if (ob && ob.b != null) { o.lines.push(`BMI <b>${ob.b.toFixed(1)}</b> — ${ob.cls.t} (${ob.c.label} cut-offs)`); o.cls = ob.cls.cls === 'neutral' ? 'neutral' : ob.cls.cls; o.badge = ob.excess ? 'Excess adiposity' : ob.cls.t.replace(/ \(.*\)/, ''); }
-  if (ob && P.waist != null) o.lines.push(`Waist <b>${P.waist} cm</b>${ob.wHigh == null ? '' : ob.wHigh ? ' — above threshold' : ' — below threshold'}${ob.whtr != null ? `, waist-to-height ${ob.whtr.toFixed(2)}` : ''}`);
+  if (ob && P.waist != null) o.lines.push(`Waist <b>${showLab('len', P.waist)}</b>${ob.wHigh == null ? '' : ob.wHigh ? ' — above threshold' : ' — below threshold'}${ob.whtr != null ? `, waist-to-height ${ob.whtr.toFixed(2)}` : ''}`);
+  if (fibLine) o.lines.push(fibLine);
   if (!o.lines.length) o.lines.push('Needs height and weight; add waist.');
   tiles.push(o);
-  return tiles;
+  /* Highest risk first, so the card needing attention is on top; ties keep a fixed order */
+  const SEV = { veryhigh: 4, high: 3, moderate: 2, interm: 2, low: 1, neutral: 0 };
+  return tiles.map((t, i) => [t, i]).sort((a, b) => (SEV[b[0].cls] || 0) - (SEV[a[0].cls] || 0) || a[1] - b[1]).map(x => x[0]);
 }
 /* Minimum CKM stage from entered data (used only as a prompt to stage formally) */
 function estStage() {
@@ -2318,52 +2541,70 @@ function spotGaps() {
   if (P.uacr == null && (atRiskKidney || P.creat != null)) gaps.push(['Order urine albumin-creatinine ratio (uACR)', 'kidney']);
   if (P.tc == null || P.hdl == null) gaps.push(['Check lipids (total and HDL cholesterol)', 'ckm']);
   if (P.dm !== '1' && P.hba1c == null && P.fpg == null && ((P.age != null && P.age >= 35) || (b != null && b >= BMI_CUT[S.bmiCut].over))) gaps.push(['Screen for diabetes (HbA1c or fasting glucose)', 't2d']);
-  if (P.dm === '1' && !f) gaps.push(['Calculate FIB-4 (AST, ALT, platelets) for liver fibrosis', 't2d']);
+  const obr = obResult();
+  if (!f && (P.dm === '1' || (obr && obr.excess))) gaps.push(['Calculate FIB-4 (AST, ALT, platelets) for liver fibrosis', P.dm === '1' ? 't2d' : 'ob']);
   if (P.hfdx !== '1' && aba != null && abaTier(aba) !== 'low' && P.ntprobnp == null) gaps.push(['Order NT-proBNP (or ECG) — HFpEF probability is not low', 'hf']);
   if (P.dm === '1' && P.dxage == null) gaps.push(['Add age at diabetes diagnosis (for SCORE2-Diabetes)', 'ckm']);
   // alerts
   if (P.ntprobnp != null && P.ntprobnp >= 125 && P.hfdx !== '1') alerts.push(['NT-proBNP ≥125 pg/mL — refer for echocardiography', 'hf']);
   else if (aba != null && abaTier(aba) === 'high' && P.hfdx !== '1') alerts.push(['High HFpEF probability — refer for echocardiography', 'hf']);
-  if (k && k.a != null && k.risk === 'veryhigh') alerts.push(['KDIGO very high risk — review nephrology referral criteria', 'kidney']);
-  if (k && k.egfr < 30) alerts.push(['eGFR below 30 — nephrology referral', 'kidney']);
+  if (k && k.egfr < 30) alerts.push(['eGFR below 30 — start or continue kidney protection, and refer to nephrology', 'kidney']);
+  else if (k && k.a != null && k.risk === 'veryhigh') alerts.push(['KDIGO very high risk — start kidney protection now, then refer to nephrology', 'kidney']);
+  const ckd = k && (k.g >= 2 || (k.a != null && k.a >= 1));
+  if (k && k.a != null && k.a >= 1 && !onMed('rasi') && (P.dm === '1' || P.htn === '1' || k.a === 2)) alerts.push(['Albuminuria — ACE inhibitor or ARB, titrated to the highest tolerated dose', 'kidney']);
+  if (ckd && P.dm !== '1' && !onMed('sglt2') && k.egfr >= 20) alerts.push(['CKD — consider an SGLT2 inhibitor (eGFR ≥20)', 'kidney']);
+  if (P.dm === '1' && k && k.a != null && k.a >= 1 && k.egfr >= 25 && onMed('rasi') && !onMed('mra')) alerts.push(['T2D with albuminuria on ACEi/ARB — add finerenone if potassium is normal', 'kidney']);
   if (bp && (bp.cls === 'high' || bp.cls === 'veryhigh')) alerts.push([`Blood pressure ${bp.txt.toLowerCase()} — confirm and treat`, 'kidney']);
   if (f && f.tier === 'high') alerts.push(['FIB-4 >2.67 — refer to hepatology', 't2d']);
   else if (f && f.tier === 'interm') alerts.push(['FIB-4 indeterminate — arrange elastography', 't2d']);
   if (dx && (dx.st.k === 'confirmed' || dx.st.k === 'likely') && P.dm !== '1') alerts.push(['Results meet diabetes criteria — confirm and record diabetes', 't2d']);
   if (dx && dx.st.k === 'repeat' && P.dm !== '1') alerts.push(['One diabetes-range result — repeat to confirm', 't2d']);
-  if (P.dm === '1' && P.hba1c != null && P.hba1c >= 7) alerts.push(['HbA1c above 7% (53 mmol/mol) — review therapy, with organ protection', 't2d']);
-  if (P.dm === '1' && ((k && (k.g >= 2 || (k.a != null && k.a >= 1))) || P.hfdx === '1' || P.ascvd === '1')) alerts.push(['Diabetes with heart or kidney involvement — SGLT2 inhibitor and/or GLP-1-based therapy (ADA/EASD 2026)', 't2d']);
-  if (P.hfdx === '1') alerts.push(['Heart failure — check foundational therapy: SGLT2 inhibitor and MRA for all; plus beta-blocker and ACE-I/ARNI/ARB if LVEF <50% (ESC 2026)', 'hf']);
+  if (P.dm === '1' && P.hba1c != null && P.hba1c >= 7) alerts.push([`HbA1c above ${tp('hba1c', '7%', '53 mmol/mol')} — review therapy, with organ protection first`, 't2d']);
+  if (P.dm === '1' && (ckd || P.hfdx === '1' || P.ascvd === '1')) {
+    const need = []; if (!onMed('sglt2')) need.push('SGLT2 inhibitor'); if (!onMed('glp1')) need.push('GLP-1-based therapy');
+    alerts.push([need.length ? `Diabetes with heart or kidney involvement — consider ${need.join(' and/or ')}` : 'Diabetes with heart or kidney involvement — on SGLT2 inhibitor and GLP-1-based therapy; review dose and adherence', 't2d']);
+  }
+  if (P.hfdx === '1') {
+    const need = []; if (!onMed('sglt2')) need.push('SGLT2 inhibitor'); if (!onMed('mra')) need.push('MRA');
+    alerts.push([`Heart failure — ${need.length ? 'add ' + need.join(' and ') + ' unless contraindicated' : 'SGLT2 inhibitor and MRA recorded'}; plus beta-blocker and ACEi/ARNI/ARB if LVEF <50% (ESC 2026)`, 'hf']);
+  }
   if (s2 && s2.risk != null && s2.band.cls === 'veryhigh') alerts.push([`${s2.model} very high risk — intensify prevention`, 'ckm']);
   const ob = obResult(); if (ob && ob.excess && (S.checks.ob || []).length) alerts.push(['Excess adiposity with related conditions — assess for clinical obesity', 'ob']);
   return { gaps, alerts };
 }
-const MOD_SHORT = { hf: 'Heart Failure', kidney: 'Kidney Health', ckm: 'CKM & CV Risk', t2d: 'Type 2 Diabetes', ob: 'Obesity' };
+const MOD_SHORT = { hf: 'Heart Failure', kidney: 'Kidney Health', ckm: 'CKM & CV Risk', t2d: 'Type 2 Diabetes', ob: 'Adiposity / Obesity' };
 function spotUpdate() {
   const bo = $('#spBmi'); if (bo) { const b = calcBMI(); bo.textContent = b ? b.toFixed(1) + ' kg/m²' : '—'; }
   const eo = $('#spEgfr'); if (eo) { const e = calcEGFR(); eo.textContent = e != null ? e.toFixed(0) + ' mL/min/1.73m²' : '—'; }
+  const fo = $('#spFib'); if (fo) { const f = fib4(); fo.textContent = f ? f.v.toFixed(2) + ' · ' + { low: 'low', interm: 'indeterminate', high: 'high' }[f.tier] : '—'; }
   const el = $('#spotSnap'); if (!el) return;
   const tiles = spotTiles(), g = spotGaps();
   const n = Object.keys(SHARED_LABELS).filter(k => P[k] != null).length;
-  el.innerHTML = `<div class="result snap">
-      <div class="snap-head"><h2>Patient snapshot</h2><div class="snap-btns no-print"><button type="button" class="btn ghost sm" data-copy>Copy for notes</button><button type="button" class="btn ghost sm" data-print>Print</button></div></div>
-      <p class="hint print-only">SPOT patient snapshot · ${new Date().toLocaleDateString()} · ${S.units === 'si' ? 'SI' : 'conventional'} units. Decision support only — verify all values.</p>
-      ${n ? '' : '<p class="hint">Start entering values on the left — the snapshot fills in as you type.</p>'}
+  /* phone: show how many findings need action on the tab and the floating button */
+  const sw = $('#swCnt'); if (sw) { sw.hidden = !g.alerts.length; sw.textContent = g.alerts.length; }
+  const fab = $('#spotFab'); if (fab) fab.innerHTML = g.alerts.length ? `See results <span class="cnt">${g.alerts.length} need action</span>` : n ? 'See results →' : 'Results appear as you type';
+  el.innerHTML = `<div class="result">
+      <div class="snap-head"><h2>Needs action</h2><div class="snap-btns no-print"><button type="button" class="btn ghost sm" data-copy>Copy for notes</button><button type="button" class="btn ghost sm" data-print>Print</button></div></div>
+      <p class="hint print-only">SPOT patient snapshot · ${new Date().toLocaleDateString()} · units: ${presetLabel()}. Decision support only — verify all values.</p>
+      ${g.alerts.length ? `<ul class="gap-list">${g.alerts.map(([t, m]) => `<li class="alert">${t} <a class="no-print" href="#/m/${m}/t">→ ${MOD_SHORT[m]}</a></li>`).join('')}</ul>` : `<p class="hint">${n ? 'Nothing flagged from the values entered.' : 'Start entering values — results fill in as you type.'}</p>`}
+    </div>
+    <div class="result snap">
+      <h2>Patient snapshot</h2><p class="hint" style="margin:0">Highest risk shown first.</p>
       ${tiles.map(t => `<div class="tile"><div class="tile-h"><span>${t.name}</span><span class="badge b-${t.cls}">${t.badge}</span></div>${t.lines.map(l => `<div class="tile-l">${l}</div>`).join('')}
         <div class="tile-links no-print"><a href="#/m/${t.mod}/o">Order & score</a><a href="#/m/${t.mod}/t">Take action</a></div></div>`).join('')}
     </div>
     <div class="result">
-      <h2>Needs action</h2>${g.alerts.length ? `<ul class="gap-list">${g.alerts.map(([t, m]) => `<li class="alert">${t} <a class="no-print" href="#/m/${m}/t">→ ${MOD_SHORT[m]}</a></li>`).join('')}</ul>` : '<p class="hint">Nothing flagged from the values entered.</p>'}
-      <h2 style="margin-top:16px">Care gaps</h2>${g.gaps.length ? `<ul class="gap-list">${g.gaps.map(([t, m]) => `<li>${t} <a class="no-print" href="#/m/${m}/o">→ ${MOD_SHORT[m]}</a></li>`).join('')}</ul>` : '<p class="hint">No obvious gaps — all core checks have values.</p>'}
+      <h2>Care gaps</h2>${g.gaps.length ? `<ul class="gap-list">${g.gaps.map(([t, m]) => `<li>${t} <a class="no-print" href="#/m/${m}/o">→ ${MOD_SHORT[m]}</a></li>`).join('')}</ul>` : '<p class="hint">No obvious gaps — all core checks have values.</p>'}
       <p class="hint" style="margin:10px 0 0">Gaps and alerts are prompts based only on the values entered. They do not replace clinical assessment.</p>
-    </div>`;
+    </div>
+    <div class="next-row no-print spot-back"><button type="button" class="btn ghost" data-spottab="enter">← Back to values</button></div>`;
 }
 function spotText() {
   const strip = h => h.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
   const tiles = spotTiles(), g = spotGaps();
-  let t = `SPOT patient snapshot (${new Date().toLocaleDateString()}, ${S.units === 'si' ? 'SI' : 'conventional'} units)\n`;
+  let t = `SPOT patient snapshot (${new Date().toLocaleDateString()}, units: ${presetLabel()})\n`;
+  if (g.alerts.length) t += '\nNeeds action:\n' + g.alerts.map(a => '  - ' + strip(a[0])).join('\n') + '\n';
   tiles.forEach(x => { t += `\n${x.name}: ${x.badge}\n` + x.lines.map(l => '  - ' + strip(l)).join('\n') + '\n'; });
-  if (g.alerts.length) t += '\nNeeds action:\n' + g.alerts.map(a => '  - ' + a[0]).join('\n') + '\n';
   if (g.gaps.length) t += '\nCare gaps:\n' + g.gaps.map(a => '  - ' + a[0]).join('\n') + '\n';
   t += '\nDecision support only; verify all values. Generated with SPOT.';
   return t;
@@ -2408,7 +2649,7 @@ function render(keepScroll) {
   const v = $('#view');
   v.innerHTML = CUR.mod === 'spot' ? spotView() : CUR.mod ? moduleView(CUR.mod, CUR.step) : landing();
   document.title = CUR.mod === 'spot' ? 'Spot my patient · SPOT' : CUR.mod ? `${MODS[CUR.mod].title} · ${STEP_NAMES[CUR.step]} · SPOT` : 'SPOT · Cardio-Renal-Metabolic Education & Decision Support';
-  $$('[data-units]').forEach(b => b.classList.toggle('on', b.dataset.units === S.units));
+  const un = $('#unitsName'); if (un) un.textContent = presetLabel();
   refresh();
   if (!keepScroll) { try { window.scrollTo(0, 0); } catch (e) { } }
 }
@@ -2449,7 +2690,8 @@ document.addEventListener('change', e => {
     refresh();
   }
   if (el.matches('select[data-sel]')) { P[el.dataset.sel] = el.value; refresh(); }
-  if (el.matches('select[data-region]')) { S.region = el.value; refresh(); }
+  if (el.matches('select[data-region]')) { S.region = el.value; savePrefs(); refresh(); }
+  if (el.matches('select[data-preset]')) { applyPreset(el.value); render(true); openSheet(); }
 });
 document.addEventListener('click', e => {
   const t = e.target.closest('button'); if (!t) return;
@@ -2457,8 +2699,19 @@ document.addEventListener('click', e => {
     P[t.dataset.seg] = t.dataset.v;
     $$(`button[data-seg="${t.dataset.seg}"]`).forEach(b => { const on = b.dataset.v === t.dataset.v; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
     if (t.dataset.seg === 'dm' && (CUR.mod === 'spot' || (CUR.mod === 'ckm' && S.panels.ckm === 'score2'))) render(true); else refresh();
-  } else if (t.dataset.units) {
-    if (S.units !== t.dataset.units) { S.units = t.dataset.units; render(true); }
+  } else if (t.dataset.uflip) {
+    const u = t.dataset.uflip; S.u[u] = uSel(u) === 'si' ? 'conv' : 'si'; savePrefs(); render(true);
+    const again = $(`[data-uflip="${u}"]`); if (again) { try { again.focus({ preventScroll: true }); } catch (err) { } }
+  } else if (t.dataset.uset) {
+    const [u, v] = t.dataset.uset.split(':'); S.u[u] = v; savePrefs(); render(true); openSheet();
+  } else if (t.dataset.scoreset) {
+    S.score = t.dataset.scoreset; S.panels.ckm = S.score; savePrefs(); render(true); openSheet();
+  } else if (t.hasAttribute('data-openunits')) {
+    openSheet();
+  } else if (t.hasAttribute('data-closeunits')) {
+    closeSheet();
+  } else if (t.dataset.spottab) {
+    S.spotTab = t.dataset.spottab; render(false);
   } else if (t.dataset.hftest) {
     S.hfTest = t.dataset.hftest;
     $$('[data-hftest]').forEach(b => { const on = b.dataset.hftest === S.hfTest; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
@@ -2466,29 +2719,61 @@ document.addEventListener('click', e => {
   } else if (t.dataset.mpanel) {
     const [m, p] = t.dataset.mpanel.split(':'); S.panels[m] = p; render(true);
   } else if (t.dataset.bmicut) {
-    S.bmiCut = t.dataset.bmicut; render(true);
+    S.bmiCut = t.dataset.bmicut; savePrefs(); render(true); if (S.sheet) openSheet();
   } else if (t.hasAttribute('data-recdm')) {
     P.dm = '1'; if (P.dxage == null && P.age != null) P.dxage = P.age; render(true);
   } else if (t.dataset.refine) {
     S.refine = t.dataset.refine; render(true);
   } else if (t.hasAttribute('data-clear')) {
-    if (confirm('Clear all patient values and checklists?')) { Object.keys(P).forEach(k => delete P[k]); S.checks = {}; S.hfTest = null; S.refine = 'none'; render(true); }
+    /* Two-tap clear: browser confirm() dialogs are blocked in some apps and embedded viewers */
+    if (!S.clearArm) {
+      S.clearArm = true; $$('[data-clear]').forEach(b => { b.textContent = 'Tap again to clear all values'; b.classList.add('arm'); });
+      clearTimeout(S.clearTimer); S.clearTimer = setTimeout(() => { S.clearArm = false; $$('[data-clear]').forEach(b => { b.textContent = 'Clear patient'; b.classList.remove('arm'); }); }, 4000);
+    } else {
+      clearTimeout(S.clearTimer); S.clearArm = false;
+      Object.keys(P).forEach(k => delete P[k]); S.checks = {}; S.hfTest = null; S.refine = 'none'; S.spotTab = 'enter';
+      render(false);
+    }
   } else if (t.hasAttribute('data-hcp')) {
-    if (t.dataset.hcp === 'yes') { S.hcp = true; $('#gateMount').innerHTML = ''; }
+    if (t.dataset.hcp === 'yes') { const g = $('#gatePreset'); applyPreset(g ? g.value : (S.preset || 'intlC')); S.hcp = true; savePrefs(); $('#gateMount').innerHTML = ''; render(true); }
     else $('#gateMount .box').innerHTML = '<h2>For healthcare professionals only</h2><p>SPOT is intended for use by healthcare professionals. Please speak with your doctor or nurse about your heart, kidney and metabolic health.</p>';
   }
 });
 
+const presetOptions = sel => Object.entries(PRESETS).map(([k, p]) => `<option value="${k}" ${sel === k ? 'selected' : ''}>${p.name}</option>`).join('');
 function showGate() {
-  if (S.hcp) return;
+  if (S.hcp && S.preset) return;
   $('#gateMount').innerHTML = `<div class="gate" role="dialog" aria-modal="true" aria-labelledby="gateT"><div class="box">
     <svg width="40" height="40" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="none" stroke="#1F4E89" stroke-width="2.4"/><circle cx="17" cy="17" r="9" fill="none" stroke="#1F4E89" stroke-width="2.4" opacity=".55"/><circle cx="17" cy="17" r="3.6" fill="#1F4E89"/></svg>
     <h2 id="gateT">Welcome to SPOT</h2><p>This tool contains clinical information and calculators intended for healthcare professionals.</p>
+    <label for="gatePreset" style="font-size:13.5px;font-weight:700">Where do you practise?</label>
+    <select id="gatePreset">${presetOptions(S.preset || 'eu')}</select>
+    <p class="hint" style="margin:-8px 0 16px;font-size:12.5px">Sets your lab and body units, the default risk score and BMI cut-offs. Change any of them later with the <b>Units</b> button at the top.</p>
     <div class="btns"><button type="button" class="btn" data-hcp="yes">I am a healthcare professional</button><button type="button" class="btn ghost" data-hcp="no">I am not</button></div></div></div>`;
 }
+function unitsSheet() {
+  const seg = (attr, val, opts) => `<div class="seg" role="group">${opts.map(([v, t]) => `<button type="button" ${attr}="${v}" class="${val === v ? 'on' : ''}" aria-pressed="${val === v}">${t}</button>`).join('')}</div>`;
+  return `<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetT"><div class="box">
+    <h2 id="sheetT">Units and region</h2><p class="hint" style="margin:0 0 14px">Choose your country to set everything at once, then change any single item. Patient values convert automatically.</p>
+    <label for="presetSel" style="font-size:13.5px;font-weight:700">Country or region</label>
+    <select id="presetSel" data-preset>${presetOptions(S.preset)}</select>
+    <div class="subhead">Units</div>
+    ${U_ORDER.map(t => `<div class="urow"><span>${UNITS[t].name}</span>${seg('data-uset', uSel(t) === 'conv' ? t + ':conv' : t + ':si', [[t + ':conv', UNITS[t].conv], [t + ':si', UNITS[t].si]])}</div>`).join('')}
+    <div class="subhead">Cardiovascular risk score shown first</div>
+    ${seg('data-scoreset', S.score, [['score2', 'SCORE2 (ESC)'], ['prevent', 'PREVENT™ (AHA)']])}
+    <div class="subhead">BMI cut-offs</div>
+    ${seg('data-bmicut', S.bmiCut, [['who', 'WHO (general)'], ['asian', 'Asian populations']])}
+    <p class="hint" style="margin:14px 0 14px">Saved on this device only. No patient values are saved.</p>
+    <button type="button" class="btn" style="width:100%" data-closeunits>Done</button></div></div>`;
+}
+function openSheet() { S.sheet = true; $('#sheetMount').innerHTML = unitsSheet(); }
+function closeSheet() { S.sheet = false; $('#sheetMount').innerHTML = ''; }
 
 /* ---------- init ---------- */
 if (PARTNER.visible) { const d = $('#devSlot'); d.hidden = false; d.textContent = PARTNER.text; }
+if (!loadPrefs()) { S.u = Object.assign({}, CONV_ALL); S.panels.ckm = S.score; }
+document.addEventListener('click', e => { if (e.target.classList && e.target.classList.contains('sheet')) closeSheet(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && S.sheet) closeSheet(); });
 render(false);
 showGate();
 </script>
