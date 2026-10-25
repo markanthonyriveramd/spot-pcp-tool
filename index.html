@@ -262,6 +262,15 @@ footer.app p{margin:0 0 8px;}
 .lowlab b{display:block;margin-bottom:4px;}
 .lowlab ul{margin:4px 0 0;padding-left:18px;}
 .linkbtn.arm{color:var(--red);}
+/* New patient button + patient-in-progress marker (all devices) */
+header.app .wrap{gap:8px;}
+.np-btn{display:flex;align-items:center;gap:7px;border:1.5px solid var(--accent);background:var(--accent);color:#fff;font-weight:750;font-size:13px;border-radius:999px;padding:7px 13px 7px 9px;cursor:pointer;white-space:nowrap;}
+.np-btn .np-cnt{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:#fff;color:var(--accent);font-size:12px;font-weight:800;}
+.np-btn.empty{background:#fff;color:var(--muted);border-color:var(--line);padding-left:13px;}
+.np-btn:hover{background:var(--accent-strong);} .np-btn.empty:hover{background:var(--surface);}
+@media(max-width:420px){ .brand b{font-size:18px;} .units-btn small{display:none;} .units-btn{padding:7px 10px;} .np-btn{font-size:12.5px;padding:6px 11px 6px 7px;} .np-btn .np-lab2{display:none;} }
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:max(18px,env(safe-area-inset-bottom));z-index:60;display:flex;align-items:center;gap:14px;background:#172033;color:#fff;border-radius:12px;padding:12px 14px 12px 16px;box-shadow:0 10px 30px rgba(0,0,0,.3);font-size:14.5px;width:max-content;max-width:calc(100vw - 24px);white-space:nowrap;}
+.toast button{background:none;border:0;color:#9FC1EA;font-weight:800;font-size:14.5px;cursor:pointer;padding:4px 6px;}
 .pcount{display:none;font-weight:700;color:var(--ink);}
 @media(max-width:620px){ .pbar .chips{display:none;} .pcount{display:inline;} }
 .lrow{display:flex;align-items:center;gap:2px;flex-wrap:wrap;}
@@ -304,6 +313,7 @@ footer.app p{margin:0 0 8px;}
       <span><b>SPOT</b><small>Cardio-renal-metabolic decision support</small></span>
     </a>
     <div class="hdr-spacer"></div>
+    <button type="button" class="np-btn" data-newpt id="npBtn" aria-label="Start a new patient">New patient</button>
     <button type="button" class="units-btn" data-openunits aria-label="Units and region settings"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>Units <small id="unitsName">—</small></button>
   </div>
 </header>
@@ -1181,7 +1191,7 @@ const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const PARTNER = { visible: false, text: '' };
 
 /* ---------- session state (memory only) ---------- */
-const S = { u: {}, preset: null, score: 'prevent', hcp: false, checks: {}, panels: { ckm: 'prevent', t2d: 'dx', ob: 'adip' }, hfTest: null, refine: 'none', region: 'moderate', bmiCut: 'who', spotTab: 'enter', clearArm: false, sheet: false };
+const S = { u: {}, preset: null, score: 'prevent', hcp: false, checks: {}, panels: { ckm: 'prevent', t2d: 'dx', ob: 'adip' }, hfTest: null, refine: 'none', region: 'moderate', bmiCut: 'who', spotTab: 'enter', sheet: false };
 const P = {}; // patient values, stored in base units (mg/dL, mg/g, %, cm, kg)
 
 /* ---------- units ----------
@@ -2403,10 +2413,38 @@ function landing() {
   </div></section>`;
 }
 
+/* ---------- new patient (one tap, with Undo) ---------- */
+let UNDO = null;
+function patientCount() { return Object.keys(P).filter(k => P[k] != null).length + Object.values(S.checks).reduce((a, c) => a + c.length, 0); }
+function newPatient() {
+  if (!patientCount()) return;
+  UNDO = { P: Object.assign({}, P), checks: JSON.parse(JSON.stringify(S.checks)), hfTest: S.hfTest, refine: S.refine };
+  Object.keys(P).forEach(k => delete P[k]); S.checks = {}; S.hfTest = null; S.refine = 'none'; S.spotTab = 'enter';
+  render(false);
+  showToast('Patient cleared — ready for the next one', true);
+}
+function undoNewPatient() {
+  if (!UNDO) return;
+  Object.assign(P, UNDO.P); S.checks = UNDO.checks; S.hfTest = UNDO.hfTest; S.refine = UNDO.refine; UNDO = null;
+  render(true); showToast('Patient values restored.', false);
+}
+function showToast(msg, undo) {
+  let t = $('#toast'); if (t) t.remove();
+  document.body.insertAdjacentHTML('beforeend', `<div class="toast no-print" id="toast" role="status">${msg}${undo ? '<button type="button" data-undo>Undo</button>' : ''}</div>`);
+  clearTimeout(S.toastTimer); S.toastTimer = setTimeout(() => { const x = $('#toast'); if (x) x.remove(); if (undo) UNDO = null; }, 7000);
+}
+function updateNpBtn() {
+  const b = $('#npBtn'); if (!b) return; const n = patientCount();
+  b.classList.toggle('empty', !n);
+  b.innerHTML = n ? `<span class="np-cnt" title="Patient in progress">${n}</span>New<span class="np-lab2">&nbsp;patient</span>` : 'No patient';
+  b.setAttribute('aria-label', n ? `Patient in progress with ${n} values. Start a new patient` : 'No patient values entered');
+  b.title = n ? `Patient in progress (${n} values). Tap to clear for the next patient.` : 'No patient values entered yet';
+}
+
 /* ---------- module page ---------- */
 function patientBar() {
   const keys = Object.keys(SHARED_LABELS).filter(k => P[k] != null);
-  return `<div class="pbar no-print" id="pbar">${keys.length ? `<span>Patient values (shared across modules):</span><span class="pcount">${keys.length} entered</span><span class="chips">${keys.map(k => `<span class="chip">${SHARED_LABELS[k]}</span>`).join('')}</span><button type="button" class="linkbtn${S.clearArm ? ' arm' : ''}" data-clear>${S.clearArm ? 'Tap again to clear all values' : 'Clear patient'}</button>` : '<span>Values you enter here are shared across all modules.</span>'}</div>`;
+  return `<div class="pbar no-print" id="pbar">${keys.length ? `<span>Patient values (shared across modules):</span><span class="pcount">${keys.length} entered</span><span class="chips">${keys.map(k => `<span class="chip">${SHARED_LABELS[k]}</span>`).join('')}</span><button type="button" class="linkbtn" data-newpt>New patient (clear all)</button>` : '<span>Values you enter here are shared across all modules.</span>'}</div>`;
 }
 function moduleView(id, step) {
   const M = MODS[id];
@@ -2650,7 +2688,7 @@ function render(keepScroll) {
   v.innerHTML = CUR.mod === 'spot' ? spotView() : CUR.mod ? moduleView(CUR.mod, CUR.step) : landing();
   document.title = CUR.mod === 'spot' ? 'Spot my patient · SPOT' : CUR.mod ? `${MODS[CUR.mod].title} · ${STEP_NAMES[CUR.step]} · SPOT` : 'SPOT · Cardio-Renal-Metabolic Education & Decision Support';
   const un = $('#unitsName'); if (un) un.textContent = presetLabel();
-  refresh();
+  refresh(); updateNpBtn();
   if (!keepScroll) { try { window.scrollTo(0, 0); } catch (e) { } }
 }
 function refresh() {
@@ -2661,6 +2699,7 @@ function refresh() {
     if (CUR.step === 'o' && MODS[CUR.mod].update) MODS[CUR.mod].update();
   }
   const pb = $('#pbar'); if (pb) pb.outerHTML = patientBar();
+  updateNpBtn();
 }
 const onAddressChange = () => { let h = '#/'; try { h = location.hash || '#/'; } catch (e) { } if (h !== ROUTE) { ROUTE = h; render(false); } };
 window.addEventListener('hashchange', onAddressChange);
@@ -2724,16 +2763,10 @@ document.addEventListener('click', e => {
     P.dm = '1'; if (P.dxage == null && P.age != null) P.dxage = P.age; render(true);
   } else if (t.dataset.refine) {
     S.refine = t.dataset.refine; render(true);
-  } else if (t.hasAttribute('data-clear')) {
-    /* Two-tap clear: browser confirm() dialogs are blocked in some apps and embedded viewers */
-    if (!S.clearArm) {
-      S.clearArm = true; $$('[data-clear]').forEach(b => { b.textContent = 'Tap again to clear all values'; b.classList.add('arm'); });
-      clearTimeout(S.clearTimer); S.clearTimer = setTimeout(() => { S.clearArm = false; $$('[data-clear]').forEach(b => { b.textContent = 'Clear patient'; b.classList.remove('arm'); }); }, 4000);
-    } else {
-      clearTimeout(S.clearTimer); S.clearArm = false;
-      Object.keys(P).forEach(k => delete P[k]); S.checks = {}; S.hfTest = null; S.refine = 'none'; S.spotTab = 'enter';
-      render(false);
-    }
+  } else if (t.hasAttribute('data-newpt')) {
+    newPatient();
+  } else if (t.hasAttribute('data-undo')) {
+    undoNewPatient();
   } else if (t.hasAttribute('data-hcp')) {
     if (t.dataset.hcp === 'yes') { const g = $('#gatePreset'); applyPreset(g ? g.value : (S.preset || 'intlC')); S.hcp = true; savePrefs(); $('#gateMount').innerHTML = ''; render(true); }
     else $('#gateMount .box').innerHTML = '<h2>For healthcare professionals only</h2><p>SPOT is intended for use by healthcare professionals. Please speak with your doctor or nurse about your heart, kidney and metabolic health.</p>';
