@@ -219,6 +219,7 @@ footer.app p{margin:0 0 8px;}
 /* phone: one column, entry and results as two tabs */
 .spot-switch{display:none;}
 .spot-fab{display:none;}
+html.typing .spot-fab{display:none !important;}
 @media(max-width:860px){
   .spot-switch{display:flex;position:sticky;top:60px;z-index:15;background:#fff;padding:8px 0 10px;margin:-6px 0 8px;border-bottom:1px solid var(--line);gap:6px;}
   .spot-switch button{flex:1;border:1.5px solid var(--line);background:#fff;color:var(--muted);font-weight:750;font-size:15px;padding:11px 8px;border-radius:12px;cursor:pointer;}
@@ -2806,6 +2807,14 @@ function unitsSheet() {
 function openSheet() { S.sheet = true; $('#sheetMount').innerHTML = unitsSheet(); }
 function closeSheet() { S.sheet = false; $('#sheetMount').innerHTML = ''; }
 
+/* Phones: hide the bottom buttons while the keyboard is open, so "See results" does not sit above the keyboard mid-entry. */
+(function () {
+  const touch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+  if (!touch) return;
+  const isField = el => el && el.tagName === 'INPUT' && !['checkbox', 'radio', 'button', 'submit', 'range'].includes(el.type);
+  document.addEventListener('focusin', e => { if (isField(e.target)) document.documentElement.classList.add('typing'); });
+  document.addEventListener('focusout', () => setTimeout(() => { if (!isField(document.activeElement)) document.documentElement.classList.remove('typing'); }, 120));
+})();
 /* ---------- init ---------- */
 if (PARTNER.visible) { const d = $('#devSlot'); d.hidden = false; d.textContent = PARTNER.text; }
 if (!loadPrefs()) { S.u = Object.assign({}, CONV_ALL); S.panels.ckm = S.score; }
