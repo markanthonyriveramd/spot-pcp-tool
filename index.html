@@ -325,7 +325,7 @@ header.app .wrap{gap:8px;}
   <div class="wrap">
     <p><b>About SPOT.</b> SPOT is an education and decision-support tool for healthcare professionals. It supports, and does not replace, clinical judgement, current guidelines or specialist advice. The calculators are risk and screening tools, not diagnostic tests, and must not be used on their own to make treatment decisions. Drug therapy is described at class level as summarised from the cited international guidelines; check the full guideline and local prescribing information before use. Verify all inputs and results before use in patient care.</p>
     <p><b>Privacy.</b> Patient values you enter stay in this browser tab only. They are never stored, sent or tracked, and they clear when the page is closed or reloaded. Only your unit and region settings are remembered on this device. No cookies are used.</p>
-    <p><b>Version 1.1</b> · October 2026 · updated after review by 10 international experts in primary care, cardiology, nephrology and diabetes, and against the 2026 ESC heart failure guideline, the ADA/EASD 2026 consensus and the KDIGO 2026 diabetes and CKD guideline (public review draft).</p>
+    <p><b>Version 1.2</b> · November 2026 · updated after review by 12 international experts in primary care, cardiology, nephrology and endocrinology, and against the 2026 ESC heart failure guideline, the ADA/EASD 2026 consensus and the KDIGO 2026 diabetes and CKD guideline (public review draft).</p>
     <p id="devSlot" hidden></p>
   </div>
 </footer>
@@ -1461,6 +1461,7 @@ const GUIDES = {
     { cite: 'SCORE2-OP Working Group and ESC Cardiovascular Risk Collaboration. SCORE2-OP risk prediction algorithms: estimating incident cardiovascular event risk in older persons in four geographical risk regions. Eur Heart J. 2021;42(25):2455–2467.', url: 'https://doi.org/10.1093/eurheartj/ehab312', visible: true },
     { cite: 'SCORE2-Diabetes Working Group and ESC Cardiovascular Risk Collaboration. SCORE2-Diabetes: 10-year cardiovascular risk estimation in type 2 diabetes in Europe. Eur Heart J. 2023;44(28):2544–2556.', url: 'https://doi.org/10.1093/eurheartj/ehad260', visible: true },
     { cite: 'Visseren FLJ, Mach F, Smulders YM, et al. 2021 ESC Guidelines on cardiovascular disease prevention in clinical practice. Eur Heart J. 2021;42(34):3227–3337.', url: 'https://doi.org/10.1093/eurheartj/ehab484', visible: true },
+    { cite: 'Mach F, Baigent C, Catapano AL, et al. 2019 ESC/EAS Guidelines for the management of dyslipidaemias: lipid modification to reduce cardiovascular risk. Eur Heart J. 2020;41(1):111–188.', url: 'https://doi.org/10.1093/eurheartj/ehz455', visible: true },
     { cite: 'Damman K, Herrington W, et al. 2026 ESC Guidelines for the management of cardiovascular disease and chronic kidney disease. Eur Heart J. 2026; ehag098.', url: 'https://doi.org/10.1093/eurheartj/ehag098', visible: true }
   ],
   t2d: [
@@ -1643,7 +1644,12 @@ MODS.hf = {
         <li><b>Urgent / same day:</b> breathlessness at rest, chest pain, syncope, systolic BP &lt;90 mmHg, low oxygen saturation, or a new fast or irregular rhythm with instability.</li>
         <li><b>For echocardiography and cardiology review:</b> natriuretic peptide at or above threshold, abnormal ECG with suspected HF, high HFpEF-ABA probability, <b>or strong clinical suspicion even when the score is low</b>.</li>
         <li><b>Specialist-led care:</b> confirmed HFrEF (LVEF &lt;50%) for rapid initiation and up-titration of foundational therapy (per local pathway), recurrent decompensation, suspected advanced HF (stage D), or uncertainty about the diagnosis.</li></ul>
-        <p class="src">Include in the referral: symptoms, examination, ECG, natriuretic peptide, eGFR and medications.</p>`
+        <p class="src">Include in the referral: symptoms, examination, ECG, natriuretic peptide, eGFR and medications.</p>`,
+      recheck: `<ul>
+        <li><b>Potassium and eGFR</b> 1–2 weeks after starting or increasing a RAS inhibitor, ARNI or MRA.</li>
+        <li><b>Review every 1–2 weeks</b> while foundational therapy is being started and increased as tolerated; and within 1–2 weeks of a hospital discharge.</li>
+        <li><b>Every visit:</b> symptoms, weight, BP, heart rate and fluid status.</li></ul>
+        <p class="src">ESC 2026 HF · AHA/ACC/HFSA 2022</p>`
     });
   }
 };
@@ -1751,6 +1757,7 @@ MODS.kidney = {
         <li><b>With type 2 diabetes</b> (KDIGO 2026 draft) — the same wording appears in the Type 2 Diabetes module:<ul>
           <li>${SGLT2_CKD_TXT()}</li><li>${FINER_TXT()}</li><li>${GLP1_CKD_TXT()}</li><li>${METF_CKD_TXT}</li></ul></li>
         <li><b>Statin</b> (with or without ezetimibe) for CKD not on dialysis, regardless of lipid levels (ESC/ERA 2026); KDIGO recommends a statin for adults aged 50 or older with CKD.</li>
+        <li><b>CKD means high or very high cardiovascular risk.</b> Manage it as such: treat BP and lipids to target, and look for heart failure and coronary disease (see CKM & CV Risk and Heart Failure). SCORE2 is not used to grade risk in moderate or severe CKD — these patients are already high or very high risk (ESC 2021).</li>
         <li><b>AF with CKD:</b> direct oral anticoagulants preferred over vitamin K antagonists when eGFR &gt;30 (ESC/ERA 2026).</li>
         <li><b>Safety:</b> avoid NSAIDs, adjust doses to eGFR, give sick-day guidance, and check creatinine and potassium 2–4 weeks after starting or increasing RAS inhibitors or MRAs.</li>
         <li><b>Lifestyle:</b> stop smoking, at least 150 minutes a week of moderate activity, healthy weight, sodium &lt;2 g/day (about 5 g salt), protein about 0.8 g/kg/day.</li>
@@ -1764,8 +1771,15 @@ MODS.kidney = {
         <li>Rapid progression — a sustained fall in eGFR of ≥25% with a change in category.</li>
         <li>Acute kidney injury or an abrupt, sustained fall in eGFR.</li>
         <li>Unexplained haematuria, persistent hyperkalaemia, resistant hypertension (≥4 agents), recurrent kidney stones or suspected hereditary kidney disease.</li>
-        <li><b>In diabetes</b>, signs that CKD may have another cause: active urine sediment, rapidly rising uACR or falling eGFR, no retinopathy, or CKD within 5 years of type 1 diabetes (KDIGO 2026 draft).</li></ul>
-        <p class="src">KDIGO 2024 · ESC/ERA 2026. Include eGFR trend, uACR results, BP readings and medications.</p>`
+        <li><b>In diabetes</b>, signs that CKD may have another cause: active urine sediment, rapidly rising uACR or falling eGFR, no retinopathy, or CKD within 5 years of type 1 diabetes (KDIGO 2026 draft).</li>
+        <li><b>Cardiology:</b> symptoms or signs of heart disease or heart failure, or established cardiovascular disease needing specialist input. Keep treating cardiovascular risk in primary care meanwhile.</li></ul>
+        <p class="src">KDIGO 2024 · ESC/ERA 2026. Include eGFR trend, uACR results, BP readings and medications.</p>`,
+      recheck: `<ul>
+        <li><b>eGFR and uACR</b> by risk on the KDIGO grid: moderately increased — at least yearly; high — about twice a year; very high — three or more times a year.</li>
+        <li><b>Creatinine and potassium</b> 2–4 weeks after starting or increasing a RAS inhibitor or MRA. A rise in creatinine of up to 30% is expected and acceptable.</li>
+        <li><b>After starting an SGLT2 inhibitor</b>, a small early fall in eGFR is expected — do not stop treatment for it.</li>
+        <li><b>BP</b> at every visit until at target.</li></ul>
+        <p class="src">KDIGO 2024 · KDIGO 2021 BP</p>`
     });
   }
 };
@@ -1774,7 +1788,7 @@ MODS.kidney = {
 MODS.ckm = {
   title: 'CKM & CV Risk', sub: 'Stage cardiovascular-kidney-metabolic syndrome and estimate 10- and 30-year risk.',
   checks: {
-    risk: ['Overweight or obesity, or high waist circumference', 'Type 2 diabetes or prediabetes', 'Hypertension', 'Chronic kidney disease or reduced eGFR', 'Raised cholesterol or triglycerides', 'Current smoking', 'Family history of premature cardiovascular disease', 'Metabolic syndrome features (central obesity, high triglycerides, low HDL)']
+    risk: ['Overweight or obesity, or high waist circumference', 'Type 2 diabetes or prediabetes', 'Hypertension', 'Chronic kidney disease or reduced eGFR', 'Raised cholesterol or triglycerides', 'Current smoking', 'Family history of premature cardiovascular disease', 'Metabolic syndrome features (central obesity, high triglycerides, low HDL)', 'Chronic inflammatory disease (rheumatoid arthritis, psoriasis, lupus, inflammatory bowel disease)', 'Pre-eclampsia, gestational diabetes or polycystic ovary syndrome', 'Previous cancer treatment with chemotherapy or chest radiotherapy']
   },
   s() {
     return `
@@ -1916,8 +1930,14 @@ MODS.ckm = {
         <li><b>Stage 3:</b> intensify prevention and treat subclinical disease; same organ-protective classes as indicated.</li>
         <li><b>Stage 4:</b> secondary prevention for established CVD; heart failure — foundational therapy per ESC 2026 (see the Heart Failure module).</li>
         <li><b>Using PREVENT™:</b> risk estimates support shared decisions about the intensity of prevention. Treatment thresholds differ between guidelines — apply the thresholds in your lipid and BP guidelines.</li>
+        <li><b>Risk enhancers:</b> chronic inflammatory disease (rheumatoid arthritis, psoriasis, lupus, inflammatory bowel disease), pre-eclampsia or hypertension in pregnancy, gestational diabetes, polycystic ovary syndrome, early menopause, previous cancer treatment, severe mental illness and obstructive sleep apnoea raise cardiovascular risk beyond what SCORE2 or PREVENT™ capture. When the score is borderline, they support more intensive prevention (ESC 2021 Prevention).</li>
         <li><b>Using SCORE2:</b> the ESC 2021 prevention guidelines use age-specific SCORE2 bands — "high" risk: consider risk-factor treatment; "very high" risk: risk-factor treatment is generally recommended. For diabetes, SCORE2-Diabetes bands guide intensity (ESC 2023).</li></ul>
         <p class="src">AHA 2023 Presidential Advisory · 2026 AHA/ACC/ADA/ASN CKM Guideline · ESC 2021 Prevention · ESC 2023 Diabetes · KDIGO 2024</p>`,
+      recheck: `<ul>
+        <li><b>Blood pressure:</b> every 1–3 months until at target, then at each routine visit.</li>
+        <li><b>Lipids:</b> 4–12 weeks after starting or changing lipid-lowering therapy, then yearly.</li>
+        <li><b>CKM stage and risk score:</b> at least yearly, and whenever a new diagnosis is made or a risk factor changes.</li></ul>
+        <p class="src">ESC 2021 Prevention · ESC/EAS 2019 Dyslipidaemia · 2026 CKM Guideline</p>`,
       refer: `<ul>
         <li><b>Stage 4b</b> (kidney failure) — nephrology. The 2026 guideline recommends a designated care coordinator across specialties.</li>
         <li><b>Very high-risk CKD</b> — nephrology (see Kidney Health referral criteria).</li>
@@ -2201,7 +2221,13 @@ MODS.t2d = {
         <li><b>Diabetes specialist:</b> suspected type 1 or other type, pregnancy or planning pregnancy, targets not met despite combination therapy, or recurrent hypoglycaemia.</li>
         <li><b>Organ specialists:</b> retinopathy (eye), kidney referral criteria (see Kidney Health), suspected heart failure (see Heart Failure).</li>
         <li><b>Liver:</b> FIB-4 &gt;2.67 to hepatology; indeterminate FIB-4 for elastography.</li></ul>
-        <p class="src">Include HbA1c trend, organ check results and medications.</p>`
+        <p class="src">Include HbA1c trend, organ check results and medications.</p>`,
+      recheck: `<ul>
+        <li><b>HbA1c</b> every 3 months until at target, then every 6 months.</li>
+        <li><b>eGFR and uACR</b> at least yearly, more often with CKD (see Kidney Health).</li>
+        <li><b>BP</b> at every visit; <b>lipids</b> at least yearly.</li>
+        <li><b>Eyes and feet</b> at least yearly.</li></ul>
+        <p class="src">ADA Standards of Care 2026</p>`
     });
   }
 };
@@ -2233,7 +2259,7 @@ function obResult() {
 MODS.ob = {
   title: 'Adiposity / Obesity', sub: 'Measure excess adiposity, spot clinical obesity and check the liver.',
   checks: {
-    rel: ['Type 2 diabetes or prediabetes', 'Hypertension', 'High triglycerides or low HDL', 'Fatty liver (MASLD)', 'Obstructive sleep apnoea (snoring, daytime sleepiness)', 'Knee or hip osteoarthritis, joint pain', 'Breathlessness on exertion or heart failure', 'Chronic kidney disease', 'Polycystic ovary syndrome or infertility', 'Gastro-oesophageal reflux', 'Low mood or depression', 'Limits in daily activities or mobility']
+    rel: ['Type 2 diabetes or prediabetes', 'Hypertension', 'High triglycerides or low HDL', 'Fatty liver (MASLD)', 'Obstructive sleep apnoea (snoring, daytime sleepiness)', 'Knee or hip osteoarthritis, joint pain', 'Breathlessness on exertion or heart failure', 'Chronic kidney disease', 'Polycystic ovary syndrome or infertility', 'Low testosterone in men (low libido, erectile dysfunction)', 'Gastro-oesophageal reflux', 'Low mood or depression', 'Limits in daily activities or mobility']
   },
   s() {
     return `
@@ -2304,8 +2330,9 @@ MODS.ob = {
     return actionView('ob', this.tailor(), {
       confirm: `<ul>
         <li><b>Confirm excess adiposity:</b> BMI plus waist circumference or waist-to-height ratio (BMI &gt;40 kg/m² presumed).</li>
-        <li><b>Look for organ dysfunction</b> (clinical obesity): BP, HbA1c or fasting glucose, lipids, liver enzymes with FIB-4, eGFR and uACR, sleep apnoea screening, joints, breathlessness, mood and daily function.</li>
-        <li><b>Secondary causes and weight-promoting medicines:</b> consider hypothyroidism or Cushing's when suggested clinically; review drugs such as some antipsychotics, corticosteroids, insulin and sulfonylureas.</li></ul>
+        <li><b>Baseline checks for everyone with obesity</b> (these also look for organ dysfunction, i.e. clinical obesity): BP; HbA1c or fasting glucose; lipids; liver enzymes with FIB-4; eGFR and uACR; sleep apnoea screening (for example STOP-BANG). Also ask about joints, breathlessness, mood and daily function.</li>
+        <li><b>Endocrine checks when suggested clinically:</b> thyroid function for symptoms of hypothyroidism; testosterone in men with symptoms of low testosterone; assessment for polycystic ovary syndrome in women with irregular periods or excess hair growth; screening for Cushing's syndrome only when features suggest it.</li>
+        <li><b>Weight-promoting medicines:</b> review drugs such as some antipsychotics, corticosteroids, insulin and sulfonylureas.</li></ul>
         <p class="src">Lancet Commission on clinical obesity 2025 · ADA Standards of Care</p>`,
       start: `<ul>
         <li><b>Person-centred conversation:</b> ask permission, avoid stigma, agree goals.</li>
@@ -2319,7 +2346,12 @@ MODS.ob = {
         <li><b>Metabolic and bariatric surgery assessment:</b> BMI ≥35 kg/m² regardless of conditions; BMI 30–34.9 with metabolic disease; lower thresholds (from 27.5 kg/m²) in Asian populations (ASMBS/IFSO 2022).</li>
         <li><b>Specialist obesity service:</b> severe or complex clinical obesity, early-onset severe obesity (possible genetic cause), suspected eating disorder, or pregnancy planning on pharmacotherapy.</li>
         <li><b>Complications:</b> suspected sleep apnoea (sleep study), FIB-4 &gt;2.67 (hepatology), heart failure or CKD criteria (see those modules).</li></ul>
-        <p class="src">Include weight history, measurements, related conditions and previous treatments.</p>`
+        <p class="src">Include weight history, measurements, related conditions and previous treatments.</p>`,
+      recheck: `<ul>
+        <li><b>Weight, waist and BP:</b> about every 3 months at first, then at least every 6–12 months.</li>
+        <li><b>HbA1c and lipids:</b> at least yearly, and sooner after major weight change or a change in medicines.</li>
+        <li><b>FIB-4:</b> every 1–3 years when low (&lt;1.3); sooner with type 2 diabetes or several metabolic risk factors.</li></ul>
+        <p class="src">ADA Standards of Care 2026 · EASL–EASD–EASO 2024</p>`
     });
   }
 };
@@ -2349,6 +2381,7 @@ function actionView(mod, tailor, b) {
     <div class="card"><div class="act-h"><span class="num">2</span><h2>Start & monitor</h2></div>${b.start}</div>
     <div class="card"><div class="act-h"><span class="num">3</span><h2>Refer when</h2></div>${b.refer}</div>
   </div>
+  ${b.recheck ? `<div class="card recheck" style="margin-top:14px"><div class="act-h"><span class="num">↻</span><h2>When to recheck</h2></div>${b.recheck}</div>` : ''}
   <p class="hint" style="margin-top:14px">Therapy is described at drug-class level, summarised from the international guidelines listed under S · Study. Check the full guideline and local prescribing information.</p>`;
 }
 
